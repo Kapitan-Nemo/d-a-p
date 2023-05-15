@@ -6,10 +6,15 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.38.6",
+    "@nuxtjs/tailwindcss": "^6.7.0",
     "@types/node": "^18",
+    "eslint": "^8.40.0",
     "nuxt": "^3.4.3"
   }
 }
