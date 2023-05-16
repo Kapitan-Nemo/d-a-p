@@ -1,5 +1,5 @@
 <template>
-  <div class="container ">
+  <div class="container">
     This is INDEX.VUE
   </div>
 </template>
