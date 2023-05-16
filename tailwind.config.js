@@ -1,6 +1,11 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 export default {
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Courier New', ...defaultTheme.fontFamily.sans],
+      },
       spacing: {
         1: '6px',
         2: '12px',

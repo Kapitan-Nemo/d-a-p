@@ -1,5 +1,3 @@
 <template>
-  <Header>
-    Product page
-  </Header>
+  <h1> Product page</h1>
 </template>
