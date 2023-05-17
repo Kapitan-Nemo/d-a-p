@@ -14,7 +14,7 @@
         <div class="flex ">
           <img src="@/assets/images/nuhikun.png" alt="Devoted Art Propaganda Logo">
           <p class="ml-6">
-            As of the <strong class="font-bold">29th of October 2021 "Nuhikun - Directions to Servants" by J • A • Seazer</strong> is available.The digital release follows the 19th of October 2021 release of the vinyl version.
+            As of the <strong>29th of October 2021 "Nuhikun - Directions to Servants" by J • A • Seazer</strong> is available.The digital release follows the 19th of October 2021 release of the vinyl version.
             Devoted Art Propaganda in cooperation with InlanDimensions International Arts Festival present: Soundtrack to Nuhikun - Directions to Servants by legendary, avant-garde Japanese troupe Tenjo Sajiki, composed by J • A • Seazer and directed by Terayama Shuji.
             The release by Devoted Art Propaganda marks the first official release of music to Tenjo Sajiki's performances outside of Japan and first release of Nuhikun - Directions to Servants [read more…]
           </p>

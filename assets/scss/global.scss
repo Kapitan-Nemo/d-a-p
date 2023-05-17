@@ -10,3 +10,19 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Courier New';
+    src: url('/assets/fonts/CourierNewBold.eot');
+    src: url('/assets/fonts/CourierNewBold.eot?#iefix') format('embedded-opentype'),
+        url('/assets/fonts/CourierNewBold.woff2') format('woff2'),
+        url('/assets/fonts/CourierNewBold.woff') format('woff'),
+        url('/assets/fonts/CourierNewBold.ttf') format('truetype'),
+        url('/assets/fonts/CourierNewBold.svg#/assets/fonts/CourierNewBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
