@@ -16,8 +16,8 @@ const albums = ref([{
   image: 'avidee.png',
 }])
 
-// TODO: move to composables
-// https://github.com/nuxt/nuxt/issues/14766
+// TODO: move to composables when this bug will be fixed:
+// https://github.com/nuxt/nuxt/issues/20827
 function useAssets(path: string): string {
   const assets = import.meta.glob('/assets/images/*', {
     eager: true,
@@ -34,7 +34,7 @@ function useAssets(path: string): string {
   </h2>
   <div v-for="album in albums" :key="album.id" class="mb-6">
     <div class="flex items-start">
-      <img :src="useAssets(album.image)" alt="Discover Nuxt 3">
+      <img :src="useAssets(album.image)" :alt="album.title">
       <div class="ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex mt-6">
