@@ -1,7 +1,3 @@
 <template>
-  <h1>
-    <slot>
-      This is the default header
-    </slot>
-  </h1>
+  <h1>Header</h1>
 </template>
