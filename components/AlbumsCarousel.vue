@@ -67,7 +67,7 @@ function useAssets(path: string): string {
       <SwiperSlide v-for="(release, idx) in releases" :key="idx">
         <div>
           <span class="relative">
-            <p class="bg-white text-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="release.quantity <= 10 ? 'text-red-700' : ' text-black' ">{{ release.quantity < 10 && release.quantity > 0 ? 'last copies' : release.quantity <= 0 ? 'sold out' : 'out now' }}</p>
+            <p class="bg-white font-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="release.quantity <= 10 ? 'text-red-700' : ' text-black' ">{{ release.quantity < 10 && release.quantity > 0 ? 'last copies' : release.quantity <= 0 ? 'sold out' : 'out now' }}</p>
             <img class="mb-3" :src="useAssets(release.image)" :alt="release.title">
           </span>
           <p class="font-bold mb-1">
