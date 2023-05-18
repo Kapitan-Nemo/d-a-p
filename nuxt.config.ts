@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
+    'nuxt-swiper',
   ],
   css: ['@/assets/scss/global.scss'],
 })

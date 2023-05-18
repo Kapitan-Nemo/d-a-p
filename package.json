@@ -17,5 +17,8 @@
     "eslint": "^8.40.0",
     "nuxt": "^3.5.0",
     "sass": "^1.62.1"
+  },
+  "dependencies": {
+    "nuxt-swiper": "^1.1.0"
   }
 }
