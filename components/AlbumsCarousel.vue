@@ -40,27 +40,35 @@ function useAssets(path: string): string {
 </script>
 
 <template>
-  <h2 class="text-4xl font-bold mb-6">
-    Releases
-  </h2>
+  <div class="px-6 pt-20">
+    <h2 class="text-4xl font-bold mb-6">
+      Releases
+    </h2>
 
-  <!-- <div v-for="release in releases" :key="release.id">
+    <!-- <div v-for="release in releases" :key="release.id">
     <p>{{ release.title }}</p>
     <p>{{ release.description }}</p>
     <img :src="useAssets(release.image)" :alt="release.title">
   </div> -->
-  <Swiper
-    :height="500"
-    :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
-    :slides-per-view="3"
-  >
-    <SwiperSlide v-for="(release, idx) in releases" :key="idx">
-      <!-- <p>{{ release.title }}</p> -->
+    <Swiper
+      :height="500"
+      :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
+      :slides-per-view="5"
+    >
+      <SwiperSlide v-for="(release, idx) in releases" :key="idx">
+        <div>
+          <img class="mb-3" :src="useAssets(release.image)" :alt="release.title">
+          <p class="font-bold">
+            {{ release.title }}
+          </p>
+          <p>{{ release.description }}</p>
+        </div>
+
       <!-- <p>{{ release.description }}</p> -->
-      <img :src="useAssets(release.image)" :alt="release.title">
-    </SwiperSlide>
-    <SwiperControls />
-  </Swiper>
+      </SwiperSlide>
+      <SwiperControls />
+    </Swiper>
+  </div>
 </template>
 
 <style lang="scss">
