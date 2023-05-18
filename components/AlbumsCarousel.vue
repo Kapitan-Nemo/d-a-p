@@ -44,12 +44,6 @@ function useAssets(path: string): string {
     <h2 class="text-4xl font-bold mb-6">
       Releases
     </h2>
-
-    <!-- <div v-for="release in releases" :key="release.id">
-    <p>{{ release.title }}</p>
-    <p>{{ release.description }}</p>
-    <img :src="useAssets(release.image)" :alt="release.title">
-  </div> -->
     <Swiper
       :height="500"
       :modules="[SwiperAutoplay, SwiperEffectCreative, SwiperNavigation]"
@@ -76,7 +70,6 @@ function useAssets(path: string): string {
   display: flex;
   justify-content: center;
   align-items: center;
-  // height: 100vh;
 }
 .swiper-wrapper {
   min-width: 100vh;
