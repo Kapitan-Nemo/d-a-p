@@ -19,13 +19,19 @@ const product = computed(() => {
   })
 })
 
+const indexCart = computed(() => {
+  return cart.value.findIndex((product) => {
+    return product.slug === route.params.slug
+  })
+})
+
 function addToCart() {
-  console.log('add to cart')
   if (cart.value.includes(product.value as IAlbum)) {
-    console.log('already in cart')
+    cart.value[indexCart.value].quantityInCart++
     return
   }
   cart.value.push(product.value as IAlbum)
+  cart.value[indexCart.value].quantityInCart++
 }
 </script>
 
@@ -33,6 +39,7 @@ function addToCart() {
   <Header>
     {{ product?.title }}
   </Header>
+  <h1>    {{ product?.id }}</h1>
   <section class="flex px-3">
     <div class="w-1/2">
       <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
