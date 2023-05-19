@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import albums from '@/components/constants/albums'
+import useAssets from '@/composables/useAssets'
+
+// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
 
 const featuredAlbums = computed(() => {
   return albums.value.filter((album) => {

@@ -2,6 +2,9 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import albums from '@/components/constants/albums'
+import useAssetsMockup from '@/composables/useAssetsMockup'
+
+// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
 
 const route = useRoute()
 
