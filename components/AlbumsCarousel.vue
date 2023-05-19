@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import albums from '@/components/constants/albums'
+import { storeToRefs } from 'pinia'
 import useAssets from '@/composables/useAssets'
 
 // TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
+
+const cartStore = useCart()
+const { albums } = storeToRefs(cartStore)
 
 const featuredAlbums = computed(() => {
   return albums.value.filter((album) => {
