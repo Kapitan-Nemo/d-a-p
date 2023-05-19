@@ -16,13 +16,20 @@ const product = computed(() => {
   <Header>
     {{ product?.title }}
   </Header>
-
-  <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
-  <div class="my-8 flex flex-col items-center justify-center">
-    <button
-      class="px-6 py-4 bg-indigo-600 hover:bg-indigo-700 text-indigo-200 rounded-lg"
-    >
-      Add to Basket{{ product?.price }}
-    </button>
-  </div>
+  <section class="flex px-3">
+    <div class="w-1/2">
+      <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
+    </div>
+    <div class="w-1/2 flex items-center justify-center flex-col">
+      <button class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center">
+        order
+      </button>
+      <p class="font-bold text-lg my-3">
+        OR
+      </p>
+      <button class="px-8 py-2 text-3xl bg-white border-4 border-black font-bold text-black rounded-none">
+        listen
+      </button>
+    </div>
+  </section>
 </template>
