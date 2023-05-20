@@ -21,8 +21,9 @@ const featuredAlbums = computed(() => {
       <div class="ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex mt-6">
-          <NuxtLink :to="`/products/${album.slug}`" class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center">
-            order
+          <NuxtLink :to="`/products/${album.slug}`" :class="album.quantity > 0 ? 'bg-black' : 'bg-gray-700'" class=" px-8 py-2 text-3xl  font-bold text-white rounded-none flex items-center justify-center">
+            <span v-if="album.quantity > 0">order</span>
+            <span v-else>sold out</span>
           </NuxtLink>
           <button class="px-8 py-2 text-3xl  ml-6 bg-white border-4 border-black font-bold text-black rounded-none">
             listen
