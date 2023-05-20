@@ -4,22 +4,21 @@ import { storeToRefs } from 'pinia'
 const cartStore = useCart()
 const { cart, cartTotal } = storeToRefs(cartStore)
 
-// search price in cart and sum
 const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => {
     return acc + product.price * product.quantityInCart
   }, 0)
 })
-console.log(cartTotalPrice.value)
 </script>
 
 <template>
   <Header :cart-link="false">
-    Cart
+    <NuxtLink to="/">
+      <span class="underline underline-offset-8">Shop</span>
+    </NuxtLink>
+    / Cart
   </Header>
-  <NuxtLink to="/">
-    Home
-  </NuxtLink>
+
   <div class="px-3 flex">
     <div class="w-1/2">
       <table class="table-auto">

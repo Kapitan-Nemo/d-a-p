@@ -37,18 +37,23 @@ function addToCart() {
 
 <template>
   <Header :cart-link="true">
-    <NuxtLink class="px-2" to="/">
+    <NuxtLink to="/">
       <span class="underline underline-offset-8">Shop</span>
-      /
     </NuxtLink>
-    {{ product?.title }}
+    / {{ product?.title }}
   </Header>
 
-  <section class="flex py-3">
+  <section class="flex px-3">
     <div class="w-1/2">
       <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
+      <p class="text-2xl font-bold mb-3">
+        Price: {{ product?.price }}$ | Format: CD
+      </p>
+      <p class=" mb-12 px-3">
+        {{ product?.description }}
+      </p>
       <button class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center" @click="addToCart">
         add to cart
       </button>

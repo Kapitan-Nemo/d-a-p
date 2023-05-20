@@ -6,7 +6,7 @@ export const useCart = defineStore('cart', {
       id: 0,
       title: 'NuhiKun - Directions to Servants',
       slug: 'nuhikun',
-      description: 'As of the 29th of October 2021 Nuhikun - Directions to Servants by J • A • Seazer is available.The digital release follows the 19th of October 2021 release of the vinyl version. Devoted Art Propaganda in cooperation with InlanDimensions International Arts Festival present: Soundtrack to Nuhikun - Directions to Servants by legendary, avant-garde Japanese troupe Tenjo Sajiki, composed by J • A • Seazer and directed by Terayama Shuji. The release by Devoted Art Propaganda marks the first official release of music to Tenjo Sajiki\'s performances outside of Japan and first release of Nuhikun - Directions to Servants [read more…]',
+      description: 'As of the 29th of October 2021 Nuhikun - Directions to Servants by J • A • Seazer is available.The digital release follows the 19th of October 2021 release of the vinyl version. Devoted Art Propaganda in cooperation with InlanDimensions International Arts Festival present: Soundtrack to Nuhikun - Directions to Servants by legendary, avant-garde Japanese troupe Tenjo Sajiki, composed by J • A • Seazer and directed by Terayama Shuji. The release by Devoted Art Propaganda marks the first official release of music to Tenjo Sajiki\'s performances outside of Japan and first release of Nuhikun - Directions to Servants.',
       image: 'nuhikun.png',
       quantity: 100,
       quantityInCart: 0,
@@ -25,7 +25,7 @@ export const useCart = defineStore('cart', {
     },
     {
       id: 2,
-      title: 'Avidee / Cannibal Troten - Gargowitch',
+      title: 'Avidee & Cannibal Troten - Gargowitch',
       slug: 'avidee',
       description: '"Avidee" and "Cannibal Troten" by Gargowitch are OUT NOW on Devoted Art Propaganda. J-case CD. Limited to 100c each. It is a black metal that goes back to the very roots of music and humanity. Gargowitch is the very beginning.',
       image: 'avidee.png',
