@@ -3,12 +3,11 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
-// import albums from '@/components/constants/albums'
 import useAssetsMockup from '@/composables/useAssetsMockup'
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
-const { albums, cart } = storeToRefs(cartStore)
+const { albums, cart, cartTotal } = storeToRefs(cartStore)
 // TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
 
 const route = useRoute()
@@ -32,6 +31,7 @@ function addToCart() {
   }
   cart.value.push(product.value as IAlbum)
   cart.value[indexCart.value].quantityInCart++
+  cartTotal.value = cart.value.length
 }
 </script>
 
@@ -39,13 +39,15 @@ function addToCart() {
   <Header>
     {{ product?.title }}
   </Header>
-  <h1>    {{ product?.id }}</h1>
+  <NuxtLink to="/">
+    Home
+  </NuxtLink>
   <section class="flex px-3">
     <div class="w-1/2">
       <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
-      <button class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center" @click="addToCart()">
+      <button class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center" @click="addToCart">
         add to cart
       </button>
       <p class="font-bold text-lg my-3">

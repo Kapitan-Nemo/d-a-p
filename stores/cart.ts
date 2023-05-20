@@ -98,7 +98,9 @@ export const useCart = defineStore('cart', {
       featured: false,
     }],
     cart: [] as IAlbums[],
+    cartTotal: 0,
   }),
+  persist: true,
 })
 
 if (import.meta.hot)

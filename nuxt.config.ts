@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-swiper',
     '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
   ],
   imports: {
     dirs: ['./stores'],
