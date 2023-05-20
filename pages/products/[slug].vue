@@ -36,13 +36,15 @@ function addToCart() {
 </script>
 
 <template>
-  <Header>
+  <Header :cart-link="true">
+    <NuxtLink class="px-2" to="/">
+      <span class="underline underline-offset-8">Shop</span>
+      /
+    </NuxtLink>
     {{ product?.title }}
   </Header>
-  <NuxtLink to="/">
-    Home
-  </NuxtLink>
-  <section class="flex px-3">
+
+  <section class="flex py-3">
     <div class="w-1/2">
       <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
     </div>
