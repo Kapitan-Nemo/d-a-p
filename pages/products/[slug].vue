@@ -11,17 +11,22 @@ const { albums, cart, cartTotal } = storeToRefs(cartStore)
 // TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
 
 const route = useRoute()
+const placeholder = {
+  title: 'Loading...',
+  description: 'Loading...',
+  image: 'Loading...',
+  price: 0,
+  quantity: 0,
+  slug: 'Loading...',
+}
+// const found = albums.value.find(e => e.slug = route.params.slug)
 
 const product = computed(() => {
-  return albums.value.find((product) => {
-    return product.slug === route.params.slug
-  })
+  return albums.value.find(e => e.slug === route.params.slug) ?? placeholder
 })
 
 const indexCart = computed(() => {
-  return cart.value.findIndex((product) => {
-    return product.slug === route.params.slug
-  })
+  return cart.value.findIndex(e => e.slug === route.params.slug)
 })
 
 function addToCart() {
@@ -54,7 +59,10 @@ function addToCart() {
       <p class=" mb-12 px-3">
         {{ product?.description }}
       </p>
-      <button class=" px-8 py-2 text-3xl bg-black font-bold text-white rounded-none flex items-center justify-center" @click="addToCart">
+      <p>{{ product?.quantity }}</p>
+      <button
+        class=" px-8 py-2 text-3xl font-bold text-white rounded-none flex items-center justify-center" :class="product?.quantity > 0 ? 'bg-black' : 'bg-gray-700'" @click="addToCart"
+      >
         add to cart
       </button>
       <p class="font-bold text-lg my-3">

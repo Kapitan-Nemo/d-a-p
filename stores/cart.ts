@@ -96,7 +96,7 @@ export const useCart = defineStore('cart', {
       quantityInCart: 0,
       price: 23,
       featured: false,
-    }],
+    }] as IAlbums[],
     cart: [] as IAlbums[],
     cartTotal: 0,
   }),
