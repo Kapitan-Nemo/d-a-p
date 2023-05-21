@@ -1,5 +1,9 @@
 <template>
-  <footer>
-    2023 &copy; D-A-P
+  <footer class="mt-3">
+    <div class="bg-black h-20 flex justify-center items-center">
+      <p class="text-2xl text-white font-bold">
+        As of the '20s, you can subscribe to the D-A-P mailing list - <a href="#" class="underline underline-offset-4">Here</a>.
+      </p>
+    </div>
   </footer>
 </template>

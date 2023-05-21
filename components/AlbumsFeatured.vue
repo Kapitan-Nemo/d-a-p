@@ -14,7 +14,7 @@ const cartStore = useCart()
       <div class="ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex mt-6">
-          <NuxtLink :to="`/products/${album.slug}`" :class="album.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700'" class=" px-8 py-2 text-3xl  font-bold text-white rounded-none flex items-center justify-center">
+          <NuxtLink :to="`/products/${album.slug}`" :class="album.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700 c'" class=" px-8 py-2 text-3xl  font-bold text-white rounded-none flex items-center justify-center">
             <span v-if="album.quantityInWarehouse > 0">order</span>
             <span v-else>sold out</span>
           </NuxtLink>
