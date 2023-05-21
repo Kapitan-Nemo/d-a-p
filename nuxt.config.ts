@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'nuxt-swiper',
     '@pinia/nuxt',
-    // '@pinia-plugin-persistedstate/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
   ],
   imports: {
     dirs: ['./stores'],
@@ -12,11 +12,5 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
-  // piniaPersistedstate: {
-  //   cookieOptions: {
-  //     sameSite: 'strict',
-  //   },
-  //   storage: 'sessionStorage',
-  // },
   css: ['@/assets/scss/global.scss'],
 })

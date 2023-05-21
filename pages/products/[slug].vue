@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import useAssetsMockup from '@/composables/useAssetsMockup'
-import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
 const route = useRoute()
@@ -27,13 +26,14 @@ const indexCart = computed(() => {
 })
 
 function addToCart() {
-  if (cartStore.cart.includes(product.value as IAlbum)) {
+  if (cartStore.cart.some(a => a.slug === route.params.slug)) {
     cartStore.cart[indexCart.value].quantityInCart++
-    return
   }
-  cartStore.cart.push(product.value as IAlbum)
-  cartStore.cart[indexCart.value].quantityInCart++
-  cartStore.cartTotalProducts = cartStore.cart.length
+  else {
+    cartStore.cart.push(product.value)
+    cartStore.cart[indexCart.value].quantityInCart++
+    cartStore.cartTotalProducts = cartStore.cart.length
+  }
 }
 </script>
 

@@ -100,9 +100,9 @@ export const useCart = defineStore('cart', {
     cart: [] as IAlbum[],
     cartTotalProducts: 0,
   }),
-  // persist: {
-  //   storage: persistedState.sessionStorage,
-  // },
+  persist: {
+    storage: persistedState.localStorage,
+  },
 })
 
 if (import.meta.hot)
