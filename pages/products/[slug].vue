@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-
 import useAssetsMockup from '@/composables/useAssetsMockup'
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
-
 const route = useRoute()
-const placeholder = {
+
+const defaultProduct = {
   id: 0,
-  title: 'Loading...',
-  slug: 'loading',
-  description: 'Loading...',
-  image: 'Loading...',
+  title: '',
+  slug: '',
+  description: '',
+  image: '',
   quantityInWarehouse: 0,
   quantityInCart: 0,
   price: 0,
@@ -20,7 +19,7 @@ const placeholder = {
 }
 
 const product = computed(() => {
-  return cartStore.albums.find(e => e.slug === route.params.slug) ?? placeholder
+  return cartStore.albums.find(e => e.slug === route.params.slug) ?? defaultProduct
 })
 
 const indexCart = computed(() => {
