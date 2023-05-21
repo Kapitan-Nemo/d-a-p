@@ -2,13 +2,17 @@
 import { storeToRefs } from 'pinia'
 
 const cartStore = useCart()
-const { cart, cartTotal } = storeToRefs(cartStore)
+const { albums, cart, cartTotalProducts } = storeToRefs(cartStore)
 
 const cartTotalPrice = computed(() => {
-  return cart.value.reduce((acc, product) => {
-    return acc + product.price * product.quantityInCart
-  }, 0)
+  return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
+
+function removeFromCart(id: number) {
+  cart.value.splice(cart.value.findIndex(e => e.id === id), 1)
+  albums.value[albums.value.findIndex(e => e.id === id)].quantityInCart = 0
+  cartTotalProducts.value = cart.value.length
+}
 </script>
 
 <template>
@@ -56,6 +60,11 @@ const cartTotalPrice = computed(() => {
             <td class="text-center p-3 font-bold border-b border-r">
               {{ album.price * album.quantityInCart }}
             </td>
+            <td class="text-center p-3 font-bold border-b border-r">
+              <button @click="removeFromCart(album.id)">
+                Remove
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -65,7 +74,7 @@ const cartTotalPrice = computed(() => {
         Your Order
       </h2>
       <div class="w-60">
-        <p>Number of products: {{ cartTotal }}</p>
+        <p>Number of products: {{ cartTotalProducts }}</p>
         <p>Total price: {{ cartTotalPrice }}</p>
         <p>Delivery: 3$</p>
       </div>

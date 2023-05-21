@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import useAssets from '@/composables/useAssets'
 
-// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
-
 const cartStore = useCart()
-const { albums } = storeToRefs(cartStore)
-
-const featuredAlbums = computed(() => {
-  return albums.value.filter((album) => {
-    return album.featured === false
-  })
-})
 </script>
 
 <template>
@@ -26,11 +16,11 @@ const featuredAlbums = computed(() => {
     >
       <SwiperControls />
 
-      <SwiperSlide v-for="(album, idx) in featuredAlbums" :key="idx">
+      <SwiperSlide v-for="(album, idx) in cartStore.albums.filter(a => a.featured === false)" :key="idx">
         <NuxtLink :to="`/products/${album.slug}`">
           <div>
             <span class="relative">
-              <p class="bg-white font-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="album.quantity <= 10 ? 'text-red-700' : ' text-black' ">{{ album.quantity < 10 && album.quantity > 0 ? 'last copies' : album.quantity <= 0 ? 'sold out' : 'out now' }}</p>
+              <p class="bg-white font-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="album.quantityInWarehouse <= 10 ? 'text-red-700' : ' text-black' ">{{ album.quantityInWarehouse < 10 && album.quantityInWarehouse > 0 ? 'last copies' : album.quantityInWarehouse <= 0 ? 'sold out' : 'out now' }}</p>
               <img class="mb-3" :src="useAssets(album.image)" :alt="album.title">
             </span>
             <p class="font-bold mb-1">

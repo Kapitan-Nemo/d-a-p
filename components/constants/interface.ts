@@ -4,7 +4,7 @@ export default interface IAlbum {
   slug: string | string[]
   description: string
   image: string
-  quantity: number
+  quantityInWarehouse: number
   quantityInCart: number
   price: number
   featured: boolean

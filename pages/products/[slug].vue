@@ -1,42 +1,40 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { storeToRefs } from 'pinia'
 
 import useAssetsMockup from '@/composables/useAssetsMockup'
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
-const { albums, cart, cartTotal } = storeToRefs(cartStore)
-// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
 
 const route = useRoute()
 const placeholder = {
+  id: 0,
   title: 'Loading...',
+  slug: 'loading',
   description: 'Loading...',
   image: 'Loading...',
+  quantityInWarehouse: 0,
+  quantityInCart: 0,
   price: 0,
-  quantity: 0,
-  slug: 'Loading...',
+  featured: false,
 }
-// const found = albums.value.find(e => e.slug = route.params.slug)
 
 const product = computed(() => {
-  return albums.value.find(e => e.slug === route.params.slug) ?? placeholder
+  return cartStore.albums.find(e => e.slug === route.params.slug) ?? placeholder
 })
 
 const indexCart = computed(() => {
-  return cart.value.findIndex(e => e.slug === route.params.slug)
+  return cartStore.cart.findIndex(e => e.slug === route.params.slug)
 })
 
 function addToCart() {
-  if (cart.value.includes(product.value as IAlbum)) {
-    cart.value[indexCart.value].quantityInCart++
+  if (cartStore.cart.includes(product.value as IAlbum)) {
+    cartStore.cart[indexCart.value].quantityInCart++
     return
   }
-  cart.value.push(product.value as IAlbum)
-  cart.value[indexCart.value].quantityInCart++
-  cartTotal.value = cart.value.length
+  cartStore.cart.push(product.value as IAlbum)
+  cartStore.cart[indexCart.value].quantityInCart++
+  cartStore.cartTotalProducts = cartStore.cart.length
 }
 </script>
 
@@ -59,9 +57,9 @@ function addToCart() {
       <p class=" mb-12 px-3">
         {{ product?.description }}
       </p>
-      <p>{{ product?.quantity }}</p>
       <button
-        class=" px-8 py-2 text-3xl font-bold text-white rounded-none flex items-center justify-center" :class="product?.quantity > 0 ? 'bg-black' : 'bg-gray-700'" @click="addToCart"
+        :disabled="product.quantityInWarehouse === 0"
+        class=" px-8 py-2 text-3xl font-bold text-white rounded-none flex items-center justify-center" :class="product.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700 cursor-not-allowed'" @click="addToCart"
       >
         add to cart
       </button>

@@ -8,7 +8,7 @@ defineProps({
   },
 })
 const cartStore = useCart()
-const { cartTotal } = storeToRefs(cartStore)
+const { cartTotalProducts } = storeToRefs(cartStore)
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const { cartTotal } = storeToRefs(cartStore)
       <slot />
     </h1>
     <Nuxt-Link v-if="cartLink" to="/cart" class="text-white">
-      In Cart: {{ cartTotal }}
+      In Cart: {{ cartTotalProducts }}
     </Nuxt-Link>
   </div>
 </template>

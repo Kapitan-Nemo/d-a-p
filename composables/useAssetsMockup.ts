@@ -6,3 +6,5 @@ export default function useAssetsMockup(path: string | undefined): string {
   // @ts-expect-error: wrong type info
   return assets[`/assets/images/mockup/${path}`]
 }
+
+// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
