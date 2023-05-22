@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     'nuxt-swiper',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    '@tailvue/nuxt',
   ],
   imports: {
     dirs: ['./stores'],

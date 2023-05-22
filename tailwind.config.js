@@ -1,6 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
+  content: [
+    'node_modules/tailvue/dist/tailvue.es.js',
+  ],
   theme: {
     container: {
       padding: {

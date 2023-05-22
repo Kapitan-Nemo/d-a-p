@@ -1,10 +1,19 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import { useToast } from 'tailvue'
 import useAssetsMockup from '@/composables/useAssetsMockup'
 
 const cartStore = useCart()
 const route = useRoute()
 
+function showToast() {
+  useToast().show({
+    type: 'success',
+    message: 'Product added to cart',
+  })
+}
+
+// TODO: move to constats
 const defaultProduct = {
   id: 0,
   title: '',
@@ -26,6 +35,7 @@ const indexCart = computed(() => {
 })
 
 function addToCart() {
+  showToast()
   if (cartStore.cart.some(a => a.slug === route.params.slug)) {
     cartStore.cart[indexCart.value].quantityInCart++
   }
@@ -71,3 +81,11 @@ function addToCart() {
     </div>
   </section>
 </template>
+
+<style lang ="scss">
+#toasts {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+</style>
