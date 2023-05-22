@@ -16,8 +16,10 @@ const { cartTotalProducts } = storeToRefs(cartStore)
     <h1 class="text-white text-2xl font-bold ml-3">
       <slot />
     </h1>
-    <Nuxt-Link v-if="cartLink" to="/cart" class="text-white">
-      In Cart: {{ cartTotalProducts }}
+    <Nuxt-Link v-show="cartLink" to="/cart" class="text-white">
+      <ClientOnly fallback-tag="p" fallback="Loading Cart...">
+        {{ cartTotalProducts }}
+      </ClientOnly>
     </Nuxt-Link>
   </div>
 </template>
