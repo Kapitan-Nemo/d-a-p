@@ -17,6 +17,14 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@tailvue/nuxt',
   ],
+  routeRules: {
+    // Homepage pre-rendered at build time
+    '/': { prerender: true },
+    // Product page generated on-demand, revalidates in background
+    '/products/**': { swr: true },
+    // Cart  renders only on client-side
+    '/cart/**': { ssr: false },
+  },
   imports: {
     dirs: ['./stores'],
   },
