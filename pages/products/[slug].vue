@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useToast } from 'tailvue'
-import useAssetsMockup from '@/composables/useAssetsMockup'
 
 const cartStore = useCart()
 const route = useRoute()
@@ -52,12 +51,12 @@ function addToCart() {
     <NuxtLink to="/">
       <span class="underline underline-offset-8">Shop</span>
     </NuxtLink>
-    / {{ product?.title }}
+    / {{ product.title }}
   </Header>
 
   <section class="flex px-3">
     <div class="w-1/2">
-      <img :src="useAssetsMockup(product?.image)" :alt="product?.title">
+      <img :src="useAssets(product.image, true)" :alt="product.title">
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
       <p class="text-2xl font-bold mb-3">

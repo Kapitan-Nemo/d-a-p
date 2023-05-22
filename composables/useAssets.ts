@@ -1,10 +1,15 @@
-export default function useAssets(path: string | undefined): string {
+export default function useAssets(path: string | undefined, mockup?: boolean): string {
   const assets = import.meta.glob('/assets/images/*', {
     eager: true,
     import: 'default',
   })
-  // @ts-expect-error: wrong type info
-  return assets[`/assets/images/${path}`]
-}
+  const assetsMockup = import.meta.glob('/assets/images/mockup/*', {
+    eager: true,
+    import: 'default',
+  })
 
-// TODO: auto import throw error  -  https://github.com/nuxt/nuxt/issues/20827
+  if (mockup)
+    return assetsMockup[`/assets/images/mockup/${path}`] as string
+  else
+    return assets[`/assets/images/${path}`] as string
+}

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import useAssets from '@/composables/useAssets'
-
 const cartStore = useCart()
 </script>
 
