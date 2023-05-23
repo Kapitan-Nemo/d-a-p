@@ -9,6 +9,7 @@ function showToast() {
   useToast().show({
     type: 'success',
     message: 'Product added to cart',
+    timeout: 5,
   })
 }
 
@@ -83,8 +84,24 @@ function addToCart() {
 
 <style lang ="scss">
 #toasts {
+  align-self: end;
   color: white;
   font-size: 16px;
   font-weight: 700;
+div.relative {
+  background: black;
+  border: solid 1px;
+  border-radius: 0;
+}
+  .items-start {
+    align-items: center;
+  }
+  div.absolute {
+    background: #4ade80;
+    border-radius: 0;
+  }
+  svg {
+    color:white;
+  }
 }
 </style>
