@@ -4,7 +4,7 @@
   </Header>
   <section>
     <div class="px-6 flex flex-col 2xl:flex-row">
-      <img class="sm:w-1/3 sm:mx-auto mb-3 2xl:mb-0" src="@/assets/images/devoted-art-propagadna-logo.png" alt="Devoted Art Propaganda Logo">
+      <img class="hidden 2xl:block mb-3 2xl:mb-0" src="@/assets/images/devoted-art-propagadna-logo.png" alt="Devoted Art Propaganda Logo">
       <div class="flex flex-col lg:ml-6 ">
         <AlbumsFeatured />
       </div>
