@@ -7,16 +7,16 @@ const cartStore = useCart()
     December 2021
   </h2>
   <div v-for="album in cartStore.albums.filter(a => a.featured)" :key="album.id" class="mb-6">
-    <div class="flex items-start">
-      <img :src="useAssets(album.image)" :alt="album.title">
-      <div class="ml-6 leading-4 description flex flex-col justify-between ">
+    <div class="flex flex-col md:flex-row items-start">
+      <img class="w-full md:w-auto" :src="useAssets(album.image)" :alt="album.title">
+      <div class="mt-6 md:mt-0 md:ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
-        <div class="flex mt-6">
-          <NuxtLink :to="`/products/${album.slug}`" :class="album.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700 c'" class=" px-8 py-2 text-3xl  font-bold text-white rounded-none flex items-center justify-center">
+        <div class="flex flex-col lg:flex-row mt-6">
+          <NuxtLink :to="`/products/${album.slug}`" :class="album.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700 c'" class=" mb-6 lg:mb-0 px-8 py-2 text-3xl  font-bold text-white rounded-none flex items-center justify-center">
             <span v-if="album.quantityInWarehouse > 0">order</span>
             <span v-else>sold out</span>
           </NuxtLink>
-          <button class="px-8 py-2 text-3xl  ml-6 bg-white border-4 border-black font-bold text-black rounded-none">
+          <button class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none">
             listen
           </button>
         </div>
