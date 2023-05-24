@@ -1,9 +1,3 @@
-<script setup lang="ts">
-onMounted (() => {
-  useFire()
-})
-</script>
-
 <template>
   <Header :cart-link="true">
     "Pasterz mebli i sprzętów z żelaza, ubrany w prześcieradła"
