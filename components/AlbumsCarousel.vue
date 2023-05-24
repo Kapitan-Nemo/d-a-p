@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const cartStore = useCart()
+// const cartStore = useCart()
+const { data: albums } = useFetch('/api/albums')
 </script>
 
 <template>
@@ -35,7 +36,7 @@ const cartStore = useCart()
     >
       <SwiperControls />
 
-      <SwiperSlide v-for="(album, idx) in cartStore.albums.filter(a => a.featured === false)" :key="idx">
+      <SwiperSlide v-for="(album, idx) in albums?.filter(a => a.featured === false)" :key="idx">
         <NuxtLink :to="`/products/${album.slug}`">
           <div>
             <span class="relative">

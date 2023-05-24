@@ -1,12 +1,13 @@
 <script setup lang="ts">
-const cartStore = useCart()
+// const cartStore = useCart()
+const { data: albums } = useFetch('/api/albums')
 </script>
 
 <template>
   <h2 class="text-4xl font-bold mb-6">
     December 2021
   </h2>
-  <div v-for="album in cartStore.albums.filter(a => a.featured)" :key="album.id" class="mb-6">
+  <div v-for="album in albums?.filter(a => a.featured)" :key="album.id" class="mb-6">
     <div class="flex flex-col md:flex-row items-start">
       <img class="w-full md:w-auto" :src="useAssets(album.image)" :alt="album.title">
       <div class="mt-6 md:mt-0 md:ml-6 leading-4 description flex flex-col justify-between ">

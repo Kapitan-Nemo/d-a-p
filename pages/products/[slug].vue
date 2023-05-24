@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { useToast } from 'tailvue'
+import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
+const { data: albums } = useFetch('/api/albums')
 const route = useRoute()
 
 function showToast() {
@@ -27,7 +29,7 @@ const defaultProduct = {
 }
 
 const product = computed(() => {
-  return cartStore.albums.find(e => e.slug === route.params.slug) ?? defaultProduct
+  return albums.value?.find(e => e.slug === route.params.slug) ?? defaultProduct
 })
 
 const indexCart = computed(() => {
@@ -40,7 +42,7 @@ function addToCart() {
     cartStore.cart[indexCart.value].quantityInCart++
   }
   else {
-    cartStore.cart.push(product.value)
+    cartStore.cart.push(product.value as IAlbum)
     cartStore.cart[indexCart.value].quantityInCart++
     cartStore.cartTotalProducts = cartStore.cart.length
   }
@@ -52,12 +54,12 @@ function addToCart() {
     <NuxtLink to="/">
       <span class="underline underline-offset-8">Shop</span>
     </NuxtLink>
-    / {{ product.title }}
+    / {{ product?.title }}
   </Header>
 
   <section class="flex px-3">
     <div class="w-1/2">
-      <img :src="useAssets(product.image, true)" :alt="product.title">
+      <img :src="useAssets(product?.image, true)" :alt="product?.title">
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
       <p class="text-2xl font-bold mb-3">
@@ -67,7 +69,7 @@ function addToCart() {
         {{ product?.description }}
       </p>
       <button
-        :disabled="product.quantityInWarehouse === 0"
+        :disabled="product?.quantityInWarehouse === 0"
         class=" px-8 py-2 text-3xl font-bold text-white rounded-none flex items-center justify-center" :class="product.quantityInWarehouse > 0 ? 'bg-black' : 'bg-gray-700 cursor-not-allowed'" @click="addToCart"
       >
         add to cart
