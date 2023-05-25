@@ -2,7 +2,9 @@
   <Header :cart-link="true">
     Success
   </Header>
-  <h2 class="text-">
-    Thank you for your order!
-  </h2>
+  <div class=" cart overflow-scroll">
+    <h2 class="flex items-center justify-center cart text-2xl font-bold text-center">
+      Thank you for your order!
+    </h2>
+  </div>
 </template>
