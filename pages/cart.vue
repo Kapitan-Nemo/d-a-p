@@ -26,7 +26,19 @@ function changeQuantity(id: number, op: boolean) {
 }
 
 function checkout() {
-  console.log(stripe)
+  const lineItems = [{
+    price: 'price_1NBlJVLJkYDmyaSRw1ncIVD7',
+    quantity: 1,
+  }]
+
+  console.log(config.app.baseURL)
+
+  stripe?.redirectToCheckout({
+    lineItems,
+    mode: 'payment',
+    successUrl: 'http://localhost:3000/success',
+    cancelUrl: 'http://localhost:3000/',
+  })
 }
 </script>
 
