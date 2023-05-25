@@ -1,5 +1,6 @@
 export default interface IAlbum {
   id: number
+  stripeId: string
   title: string
   slug: string | string[]
   description: string

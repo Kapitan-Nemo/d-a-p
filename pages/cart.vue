@@ -26,13 +26,10 @@ function changeQuantity(id: number, op: boolean) {
 }
 
 function checkout() {
-  const lineItems = [{
-    price: 'price_1NBlJVLJkYDmyaSRw1ncIVD7',
-    quantity: 1,
-  }]
-
-  console.log(config.app.baseURL)
-
+  const lineItems = cart.value.map(a => ({
+    price: a.stripeId,
+    quantity: a.quantityInCart,
+  }))
   stripe?.redirectToCheckout({
     lineItems,
     mode: 'payment',
