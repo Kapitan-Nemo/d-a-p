@@ -51,10 +51,7 @@ function addToCart() {
 
 <template>
   <Header :cart-link="true">
-    <NuxtLink to="/">
-      <span class="underline underline-offset-8">Shop</span>
-    </NuxtLink>
-    / {{ product?.title }}
+    {{ product?.title }}
   </Header>
 
   <section class="flex px-3">

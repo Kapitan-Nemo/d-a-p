@@ -30,6 +30,7 @@ function checkout() {
     price: a.stripeId,
     quantity: a.quantityInCart,
   }))
+  // TODO: get url from env
   stripe?.redirectToCheckout({
     lineItems,
     mode: 'payment',
@@ -41,10 +42,7 @@ function checkout() {
 
 <template>
   <Header :cart-link="false">
-    <NuxtLink to="/">
-      <span class="underline underline-offset-8">Shop</span>
-    </NuxtLink>
-    / Cart
+    Cart
   </Header>
 
   <ClientOnly fallback-tag="div">
