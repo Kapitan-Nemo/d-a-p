@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { loadStripe } from '@stripe/stripe-js'
 
+const config = useRuntimeConfig()
 const cartStore = useCart()
 const { cart, cartTotalProducts } = storeToRefs(cartStore)
+const stripe = await loadStripe(config.public.STRIPE_PK)
 
 const op = ref(false)
 const cartTotalPrice = computed(() => {
@@ -20,6 +23,10 @@ function changeQuantity(id: number, op: boolean) {
     album.quantityInCart += 1
   else if (!op && album && album.quantityInCart > 1)
     album.quantityInCart -= 1
+}
+
+function checkout() {
+  console.log(stripe)
 }
 </script>
 
@@ -94,10 +101,13 @@ function changeQuantity(id: number, op: boolean) {
         <h2 class="text-2xl font-bold mb-3">
           Your Order
         </h2>
-        <div class="w-60">
+        <div class="w-1/2">
           <p>Number of products: {{ cartTotalProducts }}</p>
           <p>Total price: {{ cartTotalPrice }}</p>
           <p>Delivery: 3$</p>
+          <button class="w-full bg-black text-white text-2xl font-bold py-3 mt-6" @click="checkout()">
+            Checkout
+          </button>
         </div>
       </div>
     </div>

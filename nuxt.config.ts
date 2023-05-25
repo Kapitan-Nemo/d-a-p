@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       FIREBASE_STORAGEBUCKET: process.env.FIREBASE_STORAGEBUCKET,
       FIREBASE_MESSAGINGSENDERID: process.env.FIREBASE_MESSAGINGSENDERID,
       FIREBASE_APPID: process.env.FIREBASE_APPID,
+      STRIPE_PK: process.env.STRIPE_PK,
     },
   },
   modules: [
