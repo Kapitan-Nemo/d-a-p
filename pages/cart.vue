@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 const cartStore = useCart()
 const { cart, cartTotalProducts } = storeToRefs(cartStore)
 
+const op = ref(false)
 const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
@@ -11,6 +12,14 @@ const cartTotalPrice = computed(() => {
 function removeFromCart(id: number) {
   cart.value.splice(cart.value.findIndex(e => e.id === id), 1)
   cartTotalProducts.value = cart.value.length
+}
+
+function changeQuantity(id: number, op: boolean) {
+  const album = cart.value.find(e => e.id === id)
+  if (op && album)
+    album.quantityInCart += 1
+  else if (!op && album && album.quantityInCart > 1)
+    album.quantityInCart -= 1
 }
 </script>
 
@@ -28,7 +37,7 @@ function removeFromCart(id: number) {
         Loading Cart...
       </p>
     </template>
-    <div v-if="cart.length > 0" class="px-3 flex cart">
+    <div v-if="cart.length > 0" class="px-3 flex cart overflow-scroll">
       <div class="w-1/2">
         <table class="table-auto">
           <thead>
@@ -60,7 +69,14 @@ function removeFromCart(id: number) {
                 </NuxtLink>
               </td>
               <td class="text-center p-3 font-bold border-b border-r">
-                {{ album.quantityInCart }}
+                <button @click="changeQuantity(album.id, op = false)">
+                  -
+                </button>
+                <span class="mx-3"> {{ album.quantityInCart }}</span>
+
+                <button @click="changeQuantity(album.id, op = true)">
+                  +
+                </button>
               </td>
               <td class="text-center p-3 font-bold border-b border-r">
                 {{ album.price * album.quantityInCart }}
