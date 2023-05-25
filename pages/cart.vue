@@ -22,8 +22,13 @@ function removeFromCart(id: number) {
     / Cart
   </Header>
 
-  <ClientOnly fallback-tag="div" fallback="Loading Cart...">
-    <div class="px-3 flex">
+  <ClientOnly fallback-tag="div">
+    <template #fallback>
+      <p class="flex items-center justify-center cart text-2xl font-bold text-center">
+        Loading Cart...
+      </p>
+    </template>
+    <div v-if="cart.length > 0" class="px-3 flex cart">
       <div class="w-1/2">
         <table class="table-auto">
           <thead>
@@ -80,5 +85,14 @@ function removeFromCart(id: number) {
         </div>
       </div>
     </div>
+    <p v-else class="flex items-center justify-center cart text-2xl font-bold text-center">
+      Your cart is empty!
+    </p>
   </ClientOnly>
 </template>
+
+<style lang="scss">
+.cart {
+  height: calc(100vh - 245px);
+}
+</style>
