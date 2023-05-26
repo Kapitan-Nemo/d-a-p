@@ -1,3 +1,5 @@
+// TODO: remove
+
 export default function useAssets(path: string, mockup?: boolean) {
   const assets = import.meta.glob('/public/images/*', {
     eager: true,
