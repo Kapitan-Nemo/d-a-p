@@ -30,12 +30,12 @@ function checkout() {
     price: a.stripeId,
     quantity: a.quantityInCart,
   }))
-  // TODO: get url from env
+
   stripe?.redirectToCheckout({
     lineItems,
     mode: 'payment',
-    successUrl: 'http://localhost:3000/success',
-    cancelUrl: 'http://localhost:3000/',
+    successUrl: `https://${window.location.host}/success`,
+    cancelUrl: `https://${window.location.host}/`,
   })
 }
 </script>
