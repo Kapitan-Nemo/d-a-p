@@ -4,8 +4,9 @@ import { useToast } from 'tailvue'
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
-const { data: albums } = useFetch('/api/albums')
 const route = useRoute()
+
+const { data: albums } = await useFetch('/api/albums')
 
 function showToast() {
   useToast().show({
@@ -56,7 +57,7 @@ function addToCart() {
 
   <section class="flex px-3">
     <div class="w-1/2">
-      <img :src="useAssets(product?.image, true)" :alt="product?.title">
+      <nuxt-img :placeholder="true" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title" />
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
       <p class="text-2xl font-bold mb-3">

@@ -13,10 +13,11 @@ export default defineNuxtConfig({
   },
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-swiper',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@tailvue/nuxt',
+    '@nuxt/image-edge',
+    'nuxt-swiper',
   ],
   routeRules: {
     // Homepage pre-rendered at build time
@@ -25,6 +26,9 @@ export default defineNuxtConfig({
     // '/products/**': { swr: true },
     // Cart  renders only on client-side
     // '/cart/**': { ssr: false },
+  },
+  image: {
+    // Options
   },
   imports: {
     dirs: ['./stores'],
