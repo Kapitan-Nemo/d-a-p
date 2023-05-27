@@ -7,6 +7,7 @@ const cartStore = useCart()
 const route = useRoute()
 
 const { data: albums } = await useFetch('/api/albums')
+// TODO: move to store
 
 function showToast() {
   useToast().show({
@@ -29,9 +30,7 @@ const defaultProduct = {
   featured: false,
 }
 
-const product = computed(() => {
-  return albums.value?.find(e => e.slug === route.params.slug) ?? defaultProduct
-})
+const product = albums.value?.find(e => e.slug === route.params.slug) ?? defaultProduct
 
 const indexCart = computed(() => {
   return cartStore.cart.findIndex(e => e.slug === route.params.slug)
@@ -43,7 +42,7 @@ function addToCart() {
     cartStore.cart[indexCart.value].quantityInCart++
   }
   else {
-    cartStore.cart.push(product.value as IAlbum)
+    cartStore.cart.push(product as IAlbum)
     cartStore.cart[indexCart.value].quantityInCart++
     cartStore.cartTotalProducts = cartStore.cart.length
   }
@@ -57,7 +56,7 @@ function addToCart() {
 
   <section class="flex px-3">
     <div class="w-1/2">
-      <nuxt-img placeholder sizes="2xl:861px" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title" />
+      <nuxt-img width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title" />
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
       <p class="text-2xl font-bold mb-3">
