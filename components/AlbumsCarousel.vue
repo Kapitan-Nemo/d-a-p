@@ -1,6 +1,7 @@
 <script setup lang="ts">
 // const cartStore = useCart()
-const { data: albums } = useFetch('/api/albums')
+const { data: albums } = await useFetch('/api/albums')
+// TODO: move to pinia
 </script>
 
 <template>
@@ -36,12 +37,12 @@ const { data: albums } = useFetch('/api/albums')
     >
       <SwiperControls />
 
-      <SwiperSlide v-for="(album, idx) in albums?.filter(a => a.featured === false)" :key="idx">
+      <SwiperSlide v-for="album in albums?.filter(a => a.featured === false)" :key="album.id">
         <NuxtLink :to="`/products/${album.slug}`">
           <div>
             <span class="relative">
               <p class="bg-white font-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="album.quantityInWarehouse <= 10 ? 'text-red-700' : ' text-black' ">{{ album.quantityInWarehouse < 10 && album.quantityInWarehouse > 0 ? 'last copies' : album.quantityInWarehouse <= 0 ? 'sold out' : 'out now' }}</p>
-              <img class="mb-3 w-full" :src="useAssets(album.image)" :alt="album.title">
+              <nuxt-img class="mb-3 w-full" width="250" height="250" placeholder sizes="2xl:250px" :src="`/images/${album.image}`" :alt="album.title" />
             </span>
             <p class="font-bold mb-1">
               {{ album.title }}

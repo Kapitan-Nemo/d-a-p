@@ -57,7 +57,7 @@ function addToCart() {
 
   <section class="flex px-3">
     <div class="w-1/2">
-      <nuxt-img :placeholder="true" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title" />
+      <nuxt-img placeholder sizes="2xl:861px" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title" />
     </div>
     <div class="w-1/2 flex items-center justify-center flex-col">
       <p class="text-2xl font-bold mb-3">

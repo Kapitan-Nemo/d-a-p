@@ -4,7 +4,7 @@
   </Header>
   <section>
     <div class="px-6 flex flex-col 2xl:flex-row">
-      <nuxt-img preload :placeholder="[556, 910]" class="hidden 2xl:block mb-3 2xl:mb-0" width="556" height="910" src="/images/devoted-art-propagadna-logo.png" alt="Devoted Art Propaganda Logo" />
+      <nuxt-img placeholder class="hidden 2xl:block mb-3 2xl:mb-0 logotype" sizes="2xl:556px" width="556" height="910" src="/images/devoted-art-propagadna-logo.png" alt="Devoted Art Propaganda Logo" />
       <div class="flex flex-col lg:ml-6 ">
         <AlbumsFeatured />
       </div>
@@ -24,5 +24,9 @@
 }
 .description {
   min-height: 250px;
+}
+.logotype {
+  min-width: 556px;
+  min-height: 910px;
 }
 </style>
