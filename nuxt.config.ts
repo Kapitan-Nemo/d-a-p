@@ -19,6 +19,9 @@ export default defineNuxtConfig({
     '@nuxt/image-edge',
     'nuxt-swiper',
   ],
+  swiper: {
+    modules: ['free-mode'],
+  },
   routeRules: {
     // Homepage pre-rendered at build time
     '/': { prerender: true },

@@ -17,7 +17,7 @@ const { cartTotalProducts } = storeToRefs(cartStore)
 </script>
 
 <template>
-  <div class=" w-fulll h-20 bg-black shape flex items-center justify-between lg:pl-15 pr-3 my-3">
+  <div class=" w-fulll h-20 bg-black shape flex items-center justify-between lg:pl-15 pr-6 my-3">
     <div class="text-white text-sm  sm:text-2xl font-bold mx-3 flex">
       <NuxtLink v-show="homeLink" to="/">
         <span class="underline underline-offset-8">Shop</span>
@@ -31,12 +31,12 @@ const { cartTotalProducts } = storeToRefs(cartStore)
       <ClientOnly>
         <template #fallback>
           <div class="relative">
-            <img src="~/assets/svg/cart.svg" alt="cart" class="">
+            <img src="~/assets/svg/cart.svg" alt="cart">
             <span class="bg-white rounded-full h-4 w-4 flex text-black items-center justify-center absolute -top-2 -right-2 font-bold text-sm">0</span>
           </div>
         </template>
         <div class="relative">
-          <img src="~/assets/svg/cart.svg" alt="cart" class="">
+          <img src="~/assets/svg/cart.svg" alt="cart">
           <span class="bg-white rounded-full h-4 w-4 flex text-black items-center justify-center absolute -top-2 -right-2 font-bold text-sm">{{ cartTotalProducts }} </span>
         </div>
       </ClientOnly>

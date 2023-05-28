@@ -12,6 +12,7 @@ const { data: albums } = await useFetch('/api/albums')
 
     <Swiper
       :space-between="30"
+      :free-mode="true"
       :breakpoints="{
         1536: {
           slidesPerView: 5,
