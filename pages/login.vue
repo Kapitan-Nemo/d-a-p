@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, getAuth, signInWithPopup, signOut } from 'firebase/auth'
 
 const auth = useAuth()
 
@@ -8,11 +8,24 @@ function singInWithGoogle() {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       console.log('login success')
+      console.log(auth.logged)
     })
     .catch((error) => {
       console.log(error)
     })
 }
+
+function singOutGoogle() {
+  signOut(getAuth())
+    .then(async () => {
+      console.log('logout success')
+      console.log(auth.logged)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
 onMounted(() => {
   auth.onAuth()
 })
@@ -25,5 +38,12 @@ onMounted(() => {
   <button class="" @click="singInWithGoogle">
     Google
   </button>
-  <p>{{ auth.userName }}</p>
+  <ClientOnly>
+    <div v-if="auth.logged">
+      <p>{{ auth.userName }}</p>
+      <button @click="singOutGoogle">
+        Log Out
+      </button>
+    </div>
+  </ClientOnly>
 </template>
