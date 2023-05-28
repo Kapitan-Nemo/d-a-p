@@ -9,7 +9,7 @@ const { data: albums } = await useFetch('/api/albums')
   </h2>
   <div v-for="album in albums?.filter(a => a.featured)" :key="album.id" class="mb-6">
     <div class="flex flex-col md:flex-row items-start">
-      <nuxt-img width="250" height="250" class="album" placeholder sizes="2xl:250px" :src="`/images/${album.image}`" :alt="album.title" />
+      <img :src="`/images/${album.image}`" :alt="album.title" class="album">
       <div class="mt-6 md:mt-0 md:ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex flex-col lg:flex-row mt-6">

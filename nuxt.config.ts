@@ -16,7 +16,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     '@tailvue/nuxt',
-    '@nuxt/image-edge',
     'nuxt-swiper',
   ],
   swiper: {

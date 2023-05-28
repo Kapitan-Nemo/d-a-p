@@ -43,7 +43,7 @@ const { data: albums } = await useFetch('/api/albums')
           <div>
             <span class="relative">
               <p class="bg-white font-bold text-black py-3 px-5 absolute mt-2 ml-2" :class="album.quantityInWarehouse <= 10 ? 'text-red-700' : ' text-black' ">{{ album.quantityInWarehouse < 10 && album.quantityInWarehouse > 0 ? 'last copies' : album.quantityInWarehouse <= 0 ? 'sold out' : 'out now' }}</p>
-              <nuxt-img class="mb-3 w-full" :src="`/images/${album.image}`" :alt="album.title" />
+              <img :src="`/images/${album.image}`" :alt="album.title" class="album">
             </span>
             <p class="font-bold mb-1">
               {{ album.title }}

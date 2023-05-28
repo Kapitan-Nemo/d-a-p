@@ -74,7 +74,7 @@ function checkout() {
             <tr v-for="album in cart" :key="album.id">
               <td class="py-3 pr-3 border-b border-r">
                 <NuxtLink :to="`/products/${album.slug}`">
-                  <nuxt-img width="250" height="250" :src="`/images/${album.image}`" :alt="album.title" />
+                  <img :src="`/images/${album.image}`" :alt="album.title">
                 </NuxtLink>
               </td>
               <td class="text-center p-3 font-bold border-b border-r">

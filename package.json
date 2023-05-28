@@ -20,7 +20,6 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.3",
-    "@nuxt/image-edge": "^1.0.0-28059208.2abef1b",
     "@nuxtjs/tailwindcss": "^6.7.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@tailvue/nuxt": "^0.1.68",
