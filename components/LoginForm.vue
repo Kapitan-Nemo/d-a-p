@@ -32,15 +32,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <button class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
+  <button v-if="!auth.logged" class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
     Sign in with Google
   </button>
   <ClientOnly>
     <div v-if="auth.logged">
-      <p>{{ auth.userName }}</p>
-      <button @click="singOutGoogle">
+      <h2 class="text-2xl font-bold">
+        Hi, {{ auth.userName }} <span class="wave">👋</span>
+      </h2>
+      <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
         Log Out
       </button>
     </div>
   </ClientOnly>
 </template>
+
+<style  lang="scss" scoped>
+.wave {
+  animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;        /* Change to speed up or slow down */
+  animation-iteration-count: infinite;  /* Never stop waving :) */
+  transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+  100% { transform: rotate( 0.0deg) }
+}
+</style>
