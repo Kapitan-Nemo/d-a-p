@@ -32,9 +32,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <Header :cart-link="true">
-    Login
-  </Header>
   <button class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
     Sign in with Google
   </button>

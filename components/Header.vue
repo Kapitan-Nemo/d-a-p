@@ -12,7 +12,9 @@ defineProps({
     default: true,
   },
 })
+
 const cartStore = useCart()
+const modal = useModal()
 const { cartTotalProducts } = storeToRefs(cartStore)
 </script>
 
@@ -27,9 +29,9 @@ const { cartTotalProducts } = storeToRefs(cartStore)
         <slot />
       </h1>
     </div>
-    <div class="flex items-center">
-      <img src="~/assets/svg/user.svg" class="mr-10" alt="login">
-      <Nuxt-Link v-show="cartLink" to="/cart" class="text-white">
+    <div v-show="cartLink" class="flex items-center">
+      <img src="~/assets/svg/user.svg" class="mr-10" alt="login" @click="modal.toggleModal()">
+      <Nuxt-Link to="/cart" class="text-white">
         <div class="relative">
           <img src="~/assets/svg/cart.svg" alt="cart">
           <ClientOnly>
@@ -42,4 +44,7 @@ const { cartTotalProducts } = storeToRefs(cartStore)
       </Nuxt-Link>
     </div>
   </div>
+  <Modal>
+    <LoginForm />
+  </Modal>
 </template>
