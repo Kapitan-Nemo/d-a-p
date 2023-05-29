@@ -45,6 +45,8 @@ const { cartTotalProducts } = storeToRefs(cartStore)
     </div>
   </div>
   <Modal>
-    <LoginForm />
+    <ClientOnly>
+      <LoginForm />
+    </ClientOnly>
   </Modal>
 </template>

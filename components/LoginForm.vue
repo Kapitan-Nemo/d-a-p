@@ -35,16 +35,14 @@ onMounted(() => {
   <button v-if="!auth.logged" class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
     Sign in with Google
   </button>
-  <ClientOnly>
-    <div v-if="auth.logged">
-      <h2 class="text-2xl font-bold">
-        Hi, {{ auth.userName }} <span class="wave">👋</span>
-      </h2>
-      <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
-        Log Out
-      </button>
-    </div>
-  </ClientOnly>
+  <div v-if="auth.logged">
+    <h2 class="text-2xl font-bold">
+      Hi, {{ auth.userName }} <span class="wave">👋</span>
+    </h2>
+    <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
+      Log Out
+    </button>
+  </div>
 </template>
 
 <style  lang="scss" scoped>
