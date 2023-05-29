@@ -33,10 +33,10 @@ onMounted(() => {
 
 <template>
   <Header :cart-link="true">
-    Logiin
+    Login
   </Header>
-  <button class="" @click="singInWithGoogle">
-    Google
+  <button class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
+    Sign in with Google
   </button>
   <ClientOnly>
     <div v-if="auth.logged">
