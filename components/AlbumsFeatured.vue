@@ -9,7 +9,7 @@ const { data: albums } = await useFetch('/api/albums')
   </h2>
   <div v-for="album in albums?.filter(a => a.featured)" :key="album.id" class="mb-6">
     <div class="flex flex-col md:flex-row items-start">
-      <img :src="`/images/${album.image}`" :alt="album.title" class="album">
+      <img class="album w-full" width="250" height="250" :src="`/images/${album.image}`" :alt="album.title">
       <div class="mt-6 md:mt-0 md:ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex flex-col lg:flex-row mt-6">
@@ -28,7 +28,10 @@ const { data: albums } = await useFetch('/api/albums')
 
 <style lang="scss">
 .album {
-  min-width: 250px;
-  min-height: 250px;
+  // max-height: 250px;
+  object-fit: cover;
+  @media screen and (min-width: 1024px) {
+    max-width: 250px;
+  }
 }
 </style>
