@@ -71,12 +71,13 @@ onMounted(() => {
       </p>
     </div>
     <span class="my-6 font-bold ">OR</span>
-
-    <input v-model="email" autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
-    <input v-model="password" autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
-    <button class="w-full px-8 py-2 bg-black border-black font-bold text-white" @click="singInWithEmailAndPassword">
-      Email sign in
-    </button>
+    <form @submit.prevent="singInWithEmailAndPassword">
+      <input v-model="email" required autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
+      <input v-model="password" required autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
+      <button class="w-full px-8 py-2 bg-black border-black font-bold text-white">
+        Email sign in
+      </button>
+    </form>
     <p class="mt-6">
       Don't have account? <span class="underline cursor-pointer" @click="createAccount = true">sign up</span>
     </p>
