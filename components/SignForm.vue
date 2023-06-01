@@ -29,8 +29,8 @@ function userCreateAccount() {
     .catch((error) => {
       const errorCode = error.code
       console.log(errorCode)
-      const errorMessage = error.message
-      console.log(errorMessage)
+      // const errorMessage = error.message
+      // console.log(errorMessage)
     })
 }
 
