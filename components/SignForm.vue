@@ -71,10 +71,15 @@ onMounted(() => {
       Sign in with Google
     </button>
     <span class="my-6 font-bold text-2xl">OR</span>
-    <input v-model="email" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-3 focus:outline-none" type="text" placeholder="email">
-    <input v-model="password" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-6 focus:outline-none" type="password" placeholder="password">
-    <button class="px-8 py-2 text-3xl mb-6  bg-black border-4 border-black font-bold text-white" @click="userCreateAccount">
-      Email sign in
+    <form>
+      <input v-model="email" autocomplete="username" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-3 focus:outline-none" type="text" placeholder="email">
+      <input v-model="password" autocomplete="current-password" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-6 focus:outline-none" type="password" placeholder="password">
+      <button class="px-8 py-2 text-3xl mb-6  bg-black border-4 border-black font-bold text-white" @click="userCreateAccount">
+        Email sign in
+      </button>
+    </form>
+    <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithEmailAndPassword">
+      Login with Email
     </button>
   </div>
   <div v-if="auth.logged" class="flex flex-col items-center ">
