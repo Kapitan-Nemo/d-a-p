@@ -10,27 +10,24 @@ function singInWithGoogle() {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
     .then(() => {
-      console.log('login success')
-      console.log(auth.logged)
+      useToast('Login success', 'success', 3000)
     })
     .catch((error) => {
-      console.log(error)
+      useToast(error, 'error', 3000)
     })
 }
 
 function userCreateAccount() {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((userCredential) => {
-    // Signed in
+    // Signed up
       const user = userCredential.user
       console.log(user)
-      console.log('success')
+      // TODO: add user to firestore
+      useToast('User crated', 'success', 3000)
     })
     .catch((error) => {
-      const errorCode = error.code
-      console.log(errorCode)
-      // const errorMessage = error.message
-      // console.log(errorMessage)
+      useToast(error.code, 'error', 3000)
     })
 }
 
@@ -42,21 +39,18 @@ function singInWithEmailAndPassword() {
       console.log(user)
     })
     .catch((error) => {
-      const errorCode = error.code
-      // const errorMessage = error.message
-      // TOOD: handle error message
-      useToast(errorCode, 'error', 3000)
+      useToast(error.code, 'error', 3000)
     })
 }
 
 function singOutGoogle() {
   signOut(getAuth())
     .then(async () => {
-      console.log('logout success')
-      console.log(auth.logged)
+      useToast('Logout success', 'success', 3000)
     })
     .catch((error) => {
       console.log(error)
+      useToast(error, 'error', 3000)
     })
 }
 
