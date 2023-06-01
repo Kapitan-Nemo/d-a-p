@@ -29,7 +29,7 @@ const indexCart = computed(() => {
 })
 
 function addToCart() {
-  useToast('Product added to cart', 'success', 5000)
+  useToast('Product added to cart', 'success', 3000)
   if (cartStore.cart.some(a => a.slug === route.params.slug)) {
     cartStore.cart[indexCart.value].quantityInCart++
   }

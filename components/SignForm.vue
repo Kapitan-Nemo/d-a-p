@@ -43,14 +43,9 @@ function singInWithEmailAndPassword() {
     })
     .catch((error) => {
       const errorCode = error.code
-      console.log(errorCode)
-      const errorMessage = error.message
-      console.log(errorMessage)
-      useToast().show({
-        type: 'danger',
-        message: 'Wrong email or password',
-        timeout: 50000,
-      })
+      // const errorMessage = error.message
+      // TOOD: handle error message
+      useToast(errorCode, 'error', 3000)
     })
 }
 
