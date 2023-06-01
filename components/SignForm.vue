@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const auth = useAuth()
 const email = ref('')
 const password = ref('')
 const createAccount = ref(false)
 
-function singInWithGoogle() {
+function singGoogle() {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
     .then(() => {
@@ -17,21 +17,7 @@ function singInWithGoogle() {
     })
 }
 
-function userCreateAccount() {
-  createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((userCredential) => {
-    // Signed up
-      const user = userCredential.user
-      console.log(user)
-      // TODO: add user to firestore
-      useToast('User crated', 'success', 3000)
-    })
-    .catch((error) => {
-      useToast(error.code, 'error', 3000)
-    })
-}
-
-function singInWithEmailAndPassword() {
+function singEmail() {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((userCredential) => {
     // Signed in
@@ -43,7 +29,7 @@ function singInWithEmailAndPassword() {
     })
 }
 
-function singOutGoogle() {
+function singOut() {
   signOut(getAuth())
     .then(async () => {
       useToast('Logout success', 'success', 3000)
@@ -60,9 +46,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- TODO: google icon  -->
   <div v-if="!auth.logged && !createAccount" class="flex items-center flex-col">
-    <div class="google-btn cursor-pointer" @click="singInWithGoogle">
+    <div class="google-btn cursor-pointer" @click="singGoogle">
       <div class="google-icon-wrapper">
         <img class="google-icon" src="~/assets/svg/google-logo.svg">
       </div>
@@ -71,9 +56,9 @@ onMounted(() => {
       </p>
     </div>
     <span class="my-6 font-bold ">OR</span>
-    <form @submit.prevent="singInWithEmailAndPassword">
-      <input v-model="email" required autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
-      <input v-model="password" required autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
+    <form id="sign_in" @submit.prevent="singEmail">
+      <input v-model="email" required autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" name="email" placeholder="email">
+      <input v-model="password" required autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" name="password" type="password" placeholder="password">
       <button class="w-full px-8 py-2 bg-black border-black font-bold text-white">
         Email sign in
       </button>
@@ -83,7 +68,7 @@ onMounted(() => {
     </p>
   </div>
   <div v-if="createAccount">
-    <p>Sing up form</p>
+    <SignUpForm />
     <p class="mt-6">
       Back to <span class="underline cursor-pointer" @click="createAccount = false">sign in</span>
     </p>
@@ -96,7 +81,7 @@ onMounted(() => {
       Settings
     </button>
     <span class="my-3 font-bold text-2xl">or</span>
-    <button class="px-8 py-2 bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
+    <button class="px-8 py-2 bg-white border-4 border-black font-bold text-black rounded-none" @click="singOut">
       Log Out
     </button>
   </div>
