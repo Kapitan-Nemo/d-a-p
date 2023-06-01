@@ -21,6 +21,7 @@ function singEmail() {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((userCredential) => {
     // Signed in
+    // TODO: get username from firestore
       const user = userCredential.user
       console.log(user)
     })
@@ -30,6 +31,7 @@ function singEmail() {
 }
 
 function singOut() {
+  createAccount.value = false
   signOut(getAuth())
     .then(async () => {
       useToast('Logout success', 'success', 3000)
@@ -67,7 +69,7 @@ onMounted(() => {
       Don't have account? <span class="underline cursor-pointer" @click="createAccount = true">sign up</span>
     </p>
   </div>
-  <div v-if="createAccount">
+  <div v-if="createAccount && !auth.logged">
     <SignUpForm />
     <p class="mt-6">
       Back to <span class="underline cursor-pointer" @click="createAccount = false">sign in</span>
