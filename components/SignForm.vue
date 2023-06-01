@@ -46,6 +46,11 @@ function singInWithEmailAndPassword() {
       console.log(errorCode)
       const errorMessage = error.message
       console.log(errorMessage)
+      useToast().show({
+        type: 'danger',
+        message: 'Wrong email or password',
+        timeout: 50000,
+      })
     })
 }
 
@@ -88,7 +93,7 @@ onMounted(() => {
     </p>
   </div>
   <div v-if="createAccount">
-    <p>INBA</p>
+    <p>Sing up form</p>
     <p class="mt-6">
       Back to <span class="underline cursor-pointer" @click="createAccount = false">sign in</span>
     </p>
@@ -107,7 +112,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .wave {
   animation-name: wave-animation;
   animation-duration: 2.5s;

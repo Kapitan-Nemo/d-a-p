@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
-    '@tailvue/nuxt',
     'nuxt-swiper',
   ],
   swiper: {

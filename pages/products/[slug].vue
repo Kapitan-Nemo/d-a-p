@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useToast } from 'tailvue'
+
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
@@ -8,14 +8,6 @@ const route = useRoute()
 
 const { data: albums } = await useFetch('/api/albums')
 // TODO: move to store
-
-function showToast() {
-  useToast().show({
-    type: 'success',
-    message: 'Product added to cart',
-    timeout: 5,
-  })
-}
 
 // TODO: move to constats
 const defaultProduct = {
@@ -37,7 +29,7 @@ const indexCart = computed(() => {
 })
 
 function addToCart() {
-  showToast()
+  useToast('Product added to cart', 'success', 5000)
   if (cartStore.cart.some(a => a.slug === route.params.slug)) {
     cartStore.cart[indexCart.value].quantityInCart++
   }
@@ -80,27 +72,3 @@ function addToCart() {
     </div>
   </section>
 </template>
-
-<style lang ="scss">
-#toasts {
-  align-self: end;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-div.relative {
-  background: black;
-  border: solid 1px;
-  border-radius: 0;
-}
-  .items-start {
-    align-items: center;
-  }
-  div.absolute {
-    background: #4ade80;
-    border-radius: 0;
-  }
-  svg {
-    color:white;
-  }
-}
-</style>
