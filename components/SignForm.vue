@@ -4,6 +4,7 @@ import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWith
 const auth = useAuth()
 const email = ref('')
 const password = ref('')
+const createAccount = ref(false)
 
 function singInWithGoogle() {
   const provider = new GoogleAuthProvider()
@@ -66,7 +67,7 @@ onMounted(() => {
 
 <template>
   <!-- TODO: google icon  -->
-  <div v-if="!auth.logged" class="flex items-center flex-col">
+  <div v-if="!auth.logged && !createAccount" class="flex items-center flex-col">
     <div class="google-btn cursor-pointer" @click="singInWithGoogle">
       <div class="google-icon-wrapper">
         <img class="google-icon" src="~/assets/svg/google-logo.svg">
@@ -76,16 +77,21 @@ onMounted(() => {
       </p>
     </div>
     <span class="my-6 font-bold ">OR</span>
-    <form>
-      <input v-model="email" autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
-      <input v-model="password" autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
-      <button class="w-full px-8 py-2 bg-black border-black font-bold text-white" @click="singInWithEmailAndPassword">
-        Email sign in
-      </button>
-      <p class="mt-6">
-        Don't have account? <span class="underline cursor-pointer">sign up</span>
-      </p>
-    </form>
+
+    <input v-model="email" autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
+    <input v-model="password" autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
+    <button class="w-full px-8 py-2 bg-black border-black font-bold text-white" @click="singInWithEmailAndPassword">
+      Email sign in
+    </button>
+    <p class="mt-6">
+      Don't have account? <span class="underline cursor-pointer" @click="createAccount = true">sign up</span>
+    </p>
+  </div>
+  <div v-if="createAccount">
+    <p>INBA</p>
+    <p class="mt-6">
+      Back to <span class="underline cursor-pointer" @click="createAccount = false">sign in</span>
+    </p>
   </div>
   <div v-if="auth.logged" class="flex flex-col items-center ">
     <h2 class="text-2xl font-bold mb-6">
