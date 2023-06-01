@@ -67,30 +67,35 @@ onMounted(() => {
 <template>
   <!-- TODO: google icon  -->
   <div v-if="!auth.logged" class="flex items-center flex-col">
-    <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithGoogle">
-      Sign in with Google
-    </button>
-    <span class="my-6 font-bold text-2xl">OR</span>
+    <div class="google-btn cursor-pointer" @click="singInWithGoogle">
+      <div class="google-icon-wrapper">
+        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">
+      </div>
+      <p class="btn-text">
+        <strong>Sign in with google</strong>
+      </p>
+    </div>
+    <span class="my-6 font-bold ">OR</span>
     <form>
-      <input v-model="email" autocomplete="username" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-3 focus:outline-none" type="text" placeholder="email">
-      <input v-model="password" autocomplete="current-password" class="border-b border-black border-spacing-y-4 h-10 text-black caret-black placeholder-gray-500 text-2xl mb-6 focus:outline-none" type="password" placeholder="password">
-      <button class="px-8 py-2 text-3xl mb-6  bg-black border-4 border-black font-bold text-white" @click="userCreateAccount">
+      <input v-model="email" autocomplete="username" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-3 focus:outline-none" type="text" placeholder="email">
+      <input v-model="password" autocomplete="current-password" class="w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 mb-6 focus:outline-none" type="password" placeholder="password">
+      <button class="w-full px-8 py-2 bg-black border-black font-bold text-white" @click="singInWithEmailAndPassword">
         Email sign in
       </button>
+      <p class="mt-6">
+        Don't have account? <span class="underline cursor-pointer">sign up</span>
+      </p>
     </form>
-    <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singInWithEmailAndPassword">
-      Login with Email
-    </button>
   </div>
   <div v-if="auth.logged" class="flex flex-col items-center ">
     <h2 class="text-2xl font-bold mb-6">
       Hi, {{ auth.userName }} <span class="wave">👋</span>
     </h2>
-    <button class="bg-black px-8 py-2 text-3xl font-bold text-white rounded-none flex items-center justify-center">
+    <button class="bg-black px-8 py-2 font-bold text-white rounded-none flex items-center justify-center">
       Settings
     </button>
     <span class="my-3 font-bold text-2xl">or</span>
-    <button class="px-8 py-2 text-3xl  bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
+    <button class="px-8 py-2 bg-white border-4 border-black font-bold text-black rounded-none" @click="singOutGoogle">
       Log Out
     </button>
   </div>
@@ -115,4 +120,44 @@ onMounted(() => {
    60% { transform: rotate( 0.0deg) }
   100% { transform: rotate( 0.0deg) }
 }
+
+.google-btn {
+  width: 184px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: white;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+  &:hover {
+    box-shadow: 0 0 6px #4285f4;
+  }
+  &:active {
+    background: #1669F2;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
 </style>
