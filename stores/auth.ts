@@ -3,6 +3,11 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 export const useAuth = defineStore('auth', {
   state: () => ({
     userName: '' as string | null,
+    userLastName: '',
+    userStreet: '',
+    userCity: '',
+    userZipCode: '',
+    userPhone: 0,
     userId: '',
     userEmail: '' as string | null,
     logged: false,
@@ -10,7 +15,7 @@ export const useAuth = defineStore('auth', {
   actions: {
     onAuth() {
       onAuthStateChanged(getAuth(), (user) => {
-        if (user) {
+        if (user && user.displayName) {
           this.userName = user.displayName
           this.userId = user.uid
           this.userEmail = user.email

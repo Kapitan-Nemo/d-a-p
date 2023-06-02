@@ -13,7 +13,6 @@ function singGoogle() {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       useToast('Login success', 'success', 3000)
-
       // Add a new document in collection "users"
       setDoc(doc(getFirestore(), 'users', auth.userId), {
         name: auth.userName,
