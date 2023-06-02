@@ -19,9 +19,13 @@ export const useAuth = defineStore('auth', {
           this.userId = user.uid
           this.userEmail = user.email
           this.logged = true
+          if (user?.displayName)
+            this.userName = user.displayName
         }
-        if (user?.displayName)
-          this.userName = user.displayName
+        else {
+          this.logged = false
+          this.userId = ''
+        }
       })
     },
   },
