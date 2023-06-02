@@ -4,6 +4,7 @@ export const useAuth = defineStore('auth', {
   state: () => ({
     userName: '' as string | null,
     userId: '',
+    userEmail: '' as string | null,
     logged: false,
   }),
   actions: {
@@ -12,6 +13,7 @@ export const useAuth = defineStore('auth', {
         if (user) {
           this.userName = user.displayName
           this.userId = user.uid
+          this.userEmail = user.email
           this.logged = true
         }
         else {

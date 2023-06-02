@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { doc, getFirestore, setDoc } from '@firebase/firestore'
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const auth = useAuth()
@@ -11,6 +12,13 @@ function singGoogle() {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       useToast('Login success', 'success', 3000)
+
+      // Add a new document in collection "users"
+      setDoc(doc(getFirestore(), 'users', auth.userId), {
+        name: auth.userName,
+        email: auth.userEmail,
+        id: auth.userId,
+      })
     })
     .catch((error) => {
       useToast(error, 'error', 3000)
