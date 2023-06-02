@@ -87,9 +87,11 @@ onMounted(() => {
     <h2 class="text-2xl font-bold mb-6">
       Hi, {{ auth.userName }} <span class="wave">👋</span>
     </h2>
-    <button class="bg-black px-8 py-2 font-bold text-white rounded-none flex items-center justify-center">
-      Settings
-    </button>
+    <NuxtLink to="/settings" class="">
+      <button class="bg-black px-8 py-2 font-bold text-white rounded-none flex items-center justify-center">
+        Settings
+      </button>
+    </NuxtLink>
     <span class="my-3 font-bold text-2xl">or</span>
     <button class="px-8 py-2 bg-white border-4 border-black font-bold text-black rounded-none" @click="singOut">
       Log Out

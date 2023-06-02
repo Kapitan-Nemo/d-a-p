@@ -47,11 +47,11 @@ function checkout() {
 
   <ClientOnly fallback-tag="div">
     <template #fallback>
-      <p class="flex items-center justify-center cart text-2xl font-bold text-center">
+      <p class="flex items-center justify-center default-height text-2xl font-bold text-center">
         Loading Cart...
       </p>
     </template>
-    <div v-if="cart.length > 0" class="px-3 flex cart overflow-scroll">
+    <div v-if="cart.length > 0" class="px-3 flex default-height overflow-scroll">
       <div class="w-1/2">
         <table class="table-auto">
           <thead>
@@ -118,14 +118,8 @@ function checkout() {
         </div>
       </div>
     </div>
-    <p v-else class="flex items-center justify-center cart text-2xl font-bold text-center">
+    <p v-else class="flex items-center justify-center default-height text-2xl font-bold text-center">
       Your cart is empty!
     </p>
   </ClientOnly>
 </template>
-
-<style lang="scss">
-.cart {
-  height: calc(100vh - 245px);
-}
-</style>
