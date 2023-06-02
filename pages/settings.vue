@@ -1,5 +1,13 @@
 <script setup lang="ts">
 const auth = useAuth()
+
+definePageMeta({
+  middleware() {
+    const auth = useAuth()
+    if (!auth.logged)
+      return navigateTo('/')
+  },
+})
 </script>
 
 <template>
