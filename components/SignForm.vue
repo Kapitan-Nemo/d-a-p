@@ -3,6 +3,7 @@ import { doc, getFirestore, setDoc } from '@firebase/firestore'
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const auth = useAuth()
+const modal = useModal()
 const email = ref('')
 const password = ref('')
 const createAccount = ref(false)
@@ -87,7 +88,7 @@ onMounted(() => {
     <h2 class="text-2xl font-bold mb-6">
       Hi, {{ auth.userName }} <span class="wave">👋</span>
     </h2>
-    <NuxtLink to="/settings" class="">
+    <NuxtLink to="/settings" class="" @click="modal.show = false">
       <button class="bg-black px-8 py-2 font-bold text-white rounded-none flex items-center justify-center">
         Settings
       </button>
