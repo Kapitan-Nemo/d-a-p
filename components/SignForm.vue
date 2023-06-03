@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { doc, getFirestore, setDoc } from '@firebase/firestore'
+import { doc, getDoc, getFirestore, setDoc } from '@firebase/firestore'
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 
 const auth = useAuth()
@@ -27,11 +27,19 @@ function singGoogle() {
 
 function singEmail() {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((userCredential) => {
-    // Signed in
-    // TODO: get username from firestore
-      const user = userCredential.user
-      console.log(user)
+    .then(() => {
+      useToast('Login success', 'success')
+      getDoc(doc(getFirestore(), 'users', auth.userId)).then((doc) => {
+        if (doc.exists()) {
+          console.log('Document data:', doc.data())
+          auth.userName = doc.data().name
+          auth.userLastName = doc.data().lastName
+          auth.userStreet = doc.data().street
+          auth.userCity = doc.data().city
+          auth.userZipCode = doc.data().zipCode
+          auth.userPhone = doc.data().phone
+        }
+      })
     })
     .catch((error) => {
       useToast(error.code, 'error')
@@ -43,9 +51,9 @@ function singOut() {
   signOut(getAuth())
     .then(async () => {
       useToast('Logout success', 'success')
+      auth.$reset()
     })
     .catch((error) => {
-      console.log(error)
       useToast(error, 'error')
     })
 }
@@ -155,6 +163,4 @@ onMounted(() => {
     background: #1669F2;
   }
 }
-
-// @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 </style>
