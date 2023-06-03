@@ -118,8 +118,12 @@ function checkout() {
         </div>
       </div>
     </div>
-    <p v-else class="flex items-center justify-center default-height text-2xl font-bold text-center">
-      Your cart is empty!
-    </p>
+    <div v-else class="flex items-center justify-center flex-col default-height  ">
+      <p class="text-2xl font-bold mb-6">
+        Your cart is empty!
+        Maybe you should add some products?
+      </p>
+      <img src="@/assets/images/duck-spinning.gif" alt="very weird spinning duck" class="">
+    </div>
   </ClientOnly>
 </template>
