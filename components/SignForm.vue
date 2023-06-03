@@ -120,7 +120,7 @@ onMounted(() => {
 }
 
 .google-btn {
-  width: 184px;
+  width: 230px;
   height: 42px;
   background-color: #4285f4;
   border-radius: 2px;
@@ -147,7 +147,6 @@ onMounted(() => {
     color: #fff;
     font-size: 14px;
     letter-spacing: 0.2px;
-    font-family: "Roboto";
   }
   &:hover {
     box-shadow: 0 0 6px #4285f4;
@@ -157,5 +156,5 @@ onMounted(() => {
   }
 }
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+// @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 </style>

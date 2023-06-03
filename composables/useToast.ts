@@ -6,7 +6,7 @@ export default function useToast(message: string, type: string, duration?: numbe
   toast.style.bottom = `${position}px`
   toast.classList.add('toast')
   toast.classList.add(`toast--${type}`)
-  toast.innerHTML = `${message}<span id="${position}" style="width:0%" class="toast--progress"></span>`
+  toast.innerHTML = `${message}<span id="${position}" style="width:0%"></span>`
   document.body.appendChild(toast)
 
   const toastProgress = document.getElementById(`${position}`) as HTMLSpanElement
