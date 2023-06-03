@@ -12,7 +12,7 @@ function singGoogle() {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
     .then(() => {
-      useToast('Login success', 'success', 3000)
+      useToast('Login success', 'success')
       // Add a new document in collection "users"
       setDoc(doc(getFirestore(), 'users', auth.userId), {
         name: auth.userName,
@@ -21,7 +21,7 @@ function singGoogle() {
       })
     })
     .catch((error) => {
-      useToast(error, 'error', 3000)
+      useToast(error, 'error')
     })
 }
 
@@ -34,7 +34,7 @@ function singEmail() {
       console.log(user)
     })
     .catch((error) => {
-      useToast(error.code, 'error', 3000)
+      useToast(error.code, 'error')
     })
 }
 
@@ -42,11 +42,11 @@ function singOut() {
   createAccount.value = false
   signOut(getAuth())
     .then(async () => {
-      useToast('Logout success', 'success', 3000)
+      useToast('Logout success', 'success')
     })
     .catch((error) => {
       console.log(error)
-      useToast(error, 'error', 3000)
+      useToast(error, 'error')
     })
 }
 

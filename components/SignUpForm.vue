@@ -36,10 +36,10 @@ function createUser() {
       auth.userZipCode = user.value.zipCode
       auth.userPhone = user.value.phone
 
-      useToast('User crated', 'success', 3000)
+      useToast('User crated', 'success')
     })
     .catch((error) => {
-      useToast(error.code, 'error', 3000)
+      useToast(error.code, 'error')
     })
 }
 </script>
