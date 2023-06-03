@@ -1,6 +1,7 @@
 export const useModal = defineStore('modal', {
   state: () => ({
     show: false,
+    createAccount: false,
   }),
   actions: {
     toggleModal() {

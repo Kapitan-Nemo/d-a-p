@@ -6,7 +6,6 @@ const auth = useAuth()
 const modal = useModal()
 const email = ref('')
 const password = ref('')
-const createAccount = ref(false)
 
 function singGoogle() {
   const provider = new GoogleAuthProvider()
@@ -47,7 +46,7 @@ function singEmail() {
 }
 
 function singOut() {
-  createAccount.value = false
+  modal.show = false
   signOut(getAuth())
     .then(async () => {
       useToast('Logout success', 'success')
@@ -64,7 +63,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="!auth.logged && !createAccount" class="flex items-center flex-col">
+  <div v-if="!auth.logged && !modal.createAccount" class="flex items-center flex-col">
     <div class="google-btn cursor-pointer" @click="singGoogle">
       <div class="google-icon-wrapper">
         <img class="google-icon" src="~/assets/svg/google-logo.svg">
@@ -82,13 +81,13 @@ onMounted(() => {
       </button>
     </form>
     <p class="mt-6">
-      Don't have account? <span class="underline cursor-pointer" @click="createAccount = true">sign up</span>
+      Don't have account? <span class="underline cursor-pointer" @click="modal.createAccount = true">sign up</span>
     </p>
   </div>
-  <div v-if="createAccount && !auth.logged">
+  <div v-if="modal.createAccount && !auth.logged">
     <SignUpForm />
     <p class="mt-6">
-      Back to <span class="underline cursor-pointer" @click="createAccount = false">sign in</span>
+      Back to <span class="underline cursor-pointer" @click="modal.createAccount = false">sign in</span>
     </p>
   </div>
   <div v-if="auth.logged" class="flex flex-col items-center ">
