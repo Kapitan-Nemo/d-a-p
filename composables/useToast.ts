@@ -8,17 +8,17 @@ export default function useToast(message: string, type: string, duration: number
 
   document.body.appendChild(toast)
 
-  const elem = document.querySelector('.toast--progress') as HTMLElement
+  const toastProgress = document.querySelector('.toast--progress') as HTMLSpanElement
 
   let width = 0
-  const bar = setInterval(frame, duration / 100)
+  const progress = setInterval(frame, duration / 100)
   function frame() {
     if (width >= 100) {
-      clearInterval(bar)
+      clearInterval(progress)
     }
     else {
       width++
-      elem.style.width = `${width}%`
+      toastProgress.style.width = `${width}%`
     }
   }
 
