@@ -10,15 +10,22 @@
   bottom: 15px;
   right: 15px;
   z-index: 100;
-}
-.toast--success {
-  color: #4ade80;
-}
-
-.toast--error {
-  color: #ff3860;
-}
-
-.toast--warning {
-  color: #ffdd57;
+  &--progress {
+    width: 100%;
+    display: block;
+    height: 4px;
+    background:red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  &--success {
+    color: #4ade80;
+  }
+  &--error {
+    color: #ff3860;
+  }
+  &--warning {
+    color: #ffdd57;
+  }
 }
