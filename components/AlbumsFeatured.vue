@@ -17,9 +17,9 @@ const { data: albums } = await useFetch('/api/albums')
             <span v-if="album.quantityInWarehouse > 0">order</span>
             <span v-else>sold out</span>
           </NuxtLink>
-          <button class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none">
+          <a target="_blank" :href="album.link" class="px-8 py-2 text-3xl  lg:ml-6 bg-white border-4 border-black font-bold text-black rounded-none">
             listen
-          </button>
+          </a>
         </div>
       </div>
     </div>

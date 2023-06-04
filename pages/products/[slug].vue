@@ -66,9 +66,9 @@ function addToCart() {
       <p class="font-bold text-lg my-3">
         OR
       </p>
-      <button class="px-8 py-2 text-3xl bg-white border-4 border-black font-bold text-black rounded-none">
+      <a target="_blank" :href="product.link" class="px-8 py-2 text-3xl bg-white border-4 border-black font-bold text-black rounded-none">
         listen
-      </button>
+      </a>
     </div>
   </section>
 </template>

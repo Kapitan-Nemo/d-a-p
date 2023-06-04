@@ -9,4 +9,5 @@ export default interface IAlbum {
   quantityInCart: number
   price: number
   featured: boolean
+  link: string
 }
