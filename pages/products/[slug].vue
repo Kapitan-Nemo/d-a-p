@@ -20,6 +20,7 @@ const defaultProduct = {
   quantityInCart: 0,
   price: 0,
   featured: false,
+  link: '',
 }
 
 const product = albums.value?.find(e => e.slug === route.params.slug) ?? defaultProduct
