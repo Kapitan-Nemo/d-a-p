@@ -10,6 +10,13 @@
   bottom: 15px;
   right: 15px;
   z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s, visibility 0.1s;
+  &--show {
+  opacity: 1.0;
+  visibility: visible;
+  }
   &--progress {
     width: 100%;
     display: block;
@@ -20,11 +27,20 @@
   }
   &--success {
     color: #4ade80;
+    .toast--progress {
+      background: #4ade80;
+    }
   }
   &--error {
     color: #ff3860;
+    .toast--progress {
+      background: #ff3860;
+    }
   }
   &--warning {
     color: #ffdd57;
+    .toast--progress {
+      background: #ffdd57;
+    }
   }
 }

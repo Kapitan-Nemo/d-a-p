@@ -9,6 +9,10 @@ export default function useToast(message: string, type: string, duration?: numbe
   toast.innerHTML = `${message}<span id="${position}" class="toast--progress" style="width:0%"></span>`
   document.body.appendChild(toast)
 
+  setTimeout(() => {
+    toast.classList.add('toast--show')
+  }, 100)
+
   const toastProgress = document.getElementById(`${position}`) as HTMLSpanElement
 
   let width = 0
@@ -20,20 +24,11 @@ export default function useToast(message: string, type: string, duration?: numbe
     }
     else {
       width++
-      if (width === 1)
-        toastProgress.style.backgroundColor = 'green'
-
-      else if (width === 40)
-        toastProgress.style.backgroundColor = 'orange'
-
-      else if (width === 70)
-        toastProgress.style.backgroundColor = 'red'
-
       toastProgress.style.width = `${width}%`
     }
   }
-
   setTimeout(() => {
+    toast.classList.remove('toast--show')
     toast.remove()
   }, duration)
 
