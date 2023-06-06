@@ -13,6 +13,11 @@ export default function useToast(message: string, type: string, duration?: numbe
     toast.classList.add('toast--show')
   }, 100)
 
+  // resolve promise after duration
+  setTimeout(() => {
+    toast.classList.remove('toast--show')
+  }, duration - 500)
+
   const toastProgress = document.getElementById(`${position}`) as HTMLSpanElement
 
   let width = 0
@@ -27,12 +32,12 @@ export default function useToast(message: string, type: string, duration?: numbe
       toastProgress.style.width = `${width}%`
     }
   }
+
   setTimeout(() => {
     toast.classList.remove('toast--show')
+  }, duration - 500)
+
+  setTimeout(() => {
     toast.remove()
   }, duration)
-
-  return {
-    toast,
-  }
 }
