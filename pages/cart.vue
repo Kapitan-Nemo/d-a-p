@@ -41,7 +41,7 @@ function checkout() {
 </script>
 
 <template>
-  <Header :cart-link="false">
+  <Header :cart-link="false" :breadcrumbs="false">
     Cart
   </Header>
 

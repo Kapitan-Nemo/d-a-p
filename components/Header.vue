@@ -11,6 +11,16 @@ defineProps({
     required: false,
     default: true,
   },
+  breadcrumbs: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  homepage: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 })
 
 const cartStore = useCart()
@@ -20,7 +30,7 @@ const { cartTotalProducts } = storeToRefs(cartStore)
 
 <template>
   <div class=" w-fulll h-20 bg-black shape flex items-center justify-center sm:justify-between lg:pl-15 sm:pr-6 my-3">
-    <div class="hidden text-white sm:text-lg font-bold mx-3 sm:flex">
+    <div :class="homepage ? 'hidden sm:flex' : 'flex'" class="text-white sm:text-lg font-bold mx-3 ">
       <NuxtLink v-show="homeLink" to="/">
         <span class="underline underline-offset-8">Shop</span>
         <span class="mx-3">/</span>
@@ -44,8 +54,8 @@ const { cartTotalProducts } = storeToRefs(cartStore)
       </Nuxt-Link>
     </div>
   </div>
-  <div class="flex sm:hidden text-sm mb-3 px-3">
-    <NuxtLink v-show="homeLink" to="/">
+  <div v-show="breadcrumbs && homeLink" class="flex sm:hidden text-sm mb-3 px-3">
+    <NuxtLink to="/">
       <span class="underline underline-offset-4">Shop</span>
       <span class="mx-3">/</span>
       <slot />
