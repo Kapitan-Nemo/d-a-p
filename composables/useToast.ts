@@ -1,43 +1,30 @@
-export default function useToast(message: string, type: string, duration?: number) {
+export default async function useToast(message: string, type: string, duration?: number) {
   duration = duration || 3000
-  const toast = document.createElement('div')
 
+  const toast = document.createElement('div')
   const position = document.querySelectorAll('.toast').length * 80
+  let width = 0
   toast.style.bottom = `${position}px`
   toast.classList.add('toast')
   toast.classList.add(`toast--${type}`)
   toast.innerHTML = `${message}<span id="${position}" class="toast--progress" style="width:0%"></span>`
   document.body.appendChild(toast)
 
-  setTimeout(() => {
-    toast.classList.add('toast--show')
-  }, 100)
-
-  // resolve promise after duration
-  setTimeout(() => {
-    toast.classList.remove('toast--show')
-  }, duration - 500)
-
   const toastProgress = document.getElementById(`${position}`) as HTMLSpanElement
-
-  let width = 0
   const progress = setInterval(frame, duration / 100)
 
   function frame() {
     if (width >= 100) {
       clearInterval(progress)
+      toast.classList.remove('toast--show')
+      setTimeout(() => {
+        toast.remove()
+      }, 500)
     }
     else {
       width++
       toastProgress.style.width = `${width}%`
+      toast.classList.add('toast--show')
     }
   }
-
-  setTimeout(() => {
-    toast.classList.remove('toast--show')
-  }, duration - 500)
-
-  setTimeout(() => {
-    toast.remove()
-  }, duration)
 }
