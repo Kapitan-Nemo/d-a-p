@@ -19,8 +19,8 @@ const { cartTotalProducts } = storeToRefs(cartStore)
 </script>
 
 <template>
-  <div class=" w-fulll lg:h-20 h-40 bg-black shape flex items-center justify-between lg:pl-15 pr-6 my-3">
-    <div class="text-white text-sm  sm:text-2xl font-bold mx-3 flex">
+  <div class=" w-fulll h-20 bg-black shape flex items-center justify-center sm:justify-between lg:pl-15 sm:pr-6 my-3">
+    <div class="hidden text-white sm:text-lg font-bold mx-3 sm:flex">
       <NuxtLink v-show="homeLink" to="/">
         <span class="underline underline-offset-8">Shop</span>
         <span class="mx-3">/</span>
@@ -44,6 +44,14 @@ const { cartTotalProducts } = storeToRefs(cartStore)
       </Nuxt-Link>
     </div>
   </div>
+  <div class="flex sm:hidden text-sm mb-3 px-3">
+    <NuxtLink v-show="homeLink" to="/">
+      <span class="underline underline-offset-4">Shop</span>
+      <span class="mx-3">/</span>
+      <slot />
+    </NuxtLink>
+  </div>
+
   <Modal>
     <ClientOnly>
       <SignForm />
