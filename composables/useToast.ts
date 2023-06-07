@@ -1,6 +1,7 @@
-export default function useToast(message: string, type: string, duration?: number) {
+export default async function useToast(message: string, type: string, duration?: number) {
   new Promise(() => {
     const toasts = document.querySelectorAll('.toast')
+
     toasts.forEach((toast) => {
       toast.remove()
     })

@@ -47,15 +47,15 @@ function addToCart() {
     {{ product?.title }}
   </Header>
 
-  <section class="flex px-3">
-    <div class="w-1/2">
-      <img width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title">
+  <section class="flex flex-col lg:flex-row px-3">
+    <div class="w-full lg:w-1/2">
+      <img class="mb-3 lg:mb-0" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title">
     </div>
-    <div class="w-1/2 flex items-center justify-center flex-col">
-      <p class="text-2xl font-bold mb-3">
+    <div class="w-full lg:w-1/2 flex items-center justify-center flex-col">
+      <p class="text-xl sm:text-2xl font-bold mb-3">
         Price: {{ product?.price }}$ | Format: CD
       </p>
-      <p class=" mb-12 px-3">
+      <p class="mb-12 px-3">
         {{ product?.description }}
       </p>
       <button
@@ -67,7 +67,7 @@ function addToCart() {
       <p class="font-bold text-lg my-3">
         OR
       </p>
-      <a target="_blank" :href="product.link" class="px-8 py-2 text-3xl bg-white border-4 border-black font-bold text-black rounded-none">
+      <a target="_blank" :href="product.link" class="px-8 py-2 text-3xl bg-white border-4 border-black font-bold text-black rounded-none items-center justify-center flex">
         listen
       </a>
     </div>
