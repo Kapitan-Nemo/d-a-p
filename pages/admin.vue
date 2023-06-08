@@ -8,6 +8,7 @@ definePageMeta({
   <div>
     <NuxtLayout name="admin">
       <AdminNav />
+      <AdminAside />
     </NuxtLayout>
   </div>
 </template>
