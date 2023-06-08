@@ -2,6 +2,8 @@
 definePageMeta({
   layout: false,
 })
+const route = useRoute()
+console.log(route.name)
 </script>
 
 <template>
@@ -10,9 +12,10 @@ definePageMeta({
     <div class="flex">
       <AdminAside class="border-r border-dark-200" />
       <div class="p-6 w-full bg-dark-100">
-        <p class="text-white">
-          Content
-        </p>
+        <div v-if="route.name === 'admin'" class="text-white">
+          Content Dashboard for boxes
+        </div>
+        <NuxtPage v-else />
       </div>
     </div>
   </NuxtLayout>
