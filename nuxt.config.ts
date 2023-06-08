@@ -21,6 +21,10 @@ export default defineNuxtConfig({
   swiper: {
     modules: ['free-mode'],
   },
+  components: [
+    { path: '~/components/admin', prefix: 'Admin' }, '~/components',
+  ],
+
   routeRules: {
     // Homepage pre-rendered at build time
     '/': { prerender: true },
