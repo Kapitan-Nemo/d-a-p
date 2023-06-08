@@ -1,4 +1,8 @@
 <script setup lang="ts">
+const auth = useAuth()
+console.log(auth.userName)
+console.log(auth.userPhoto)
+const photo = auth.userPhoto
 </script>
 
 <template>
@@ -8,6 +12,7 @@
         <div class="flex items-center justify-start">
           <div class="flex ml-2">
             <span class="text-2xl font-bold text-white">D-A-P</span>
+            {{ auth.userName }}
           </div>
         </div>
         <div class="flex items-center">
@@ -17,7 +22,7 @@
 
           <div class="flex items-center ml-3">
             <button type="button" class="flex">
-              <img class="w-8 h-8" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+              <img class="w-8 h-8" :src="photo" alt="user photo">
             </button>
           </div>
         </div>

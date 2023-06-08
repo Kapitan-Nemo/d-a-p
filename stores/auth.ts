@@ -10,6 +10,7 @@ export const useAuth = defineStore('auth', {
     userPhone: 0,
     userId: '',
     userEmail: '' as string | null,
+    userPhoto: '' as string | null,
     logged: false,
   }),
   actions: {
@@ -21,6 +22,7 @@ export const useAuth = defineStore('auth', {
           this.logged = true
           if (user?.displayName)
             this.userName = user.displayName
+          this.userPhoto = user.photoURL
         }
         else {
           this.logged = false

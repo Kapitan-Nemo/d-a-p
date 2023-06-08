@@ -28,6 +28,9 @@ export default defineNuxtConfig({
   routeRules: {
     // Homepage pre-rendered at build time
     '/': { prerender: true },
+    // Admin dashboard renders only on client-side
+    '/admin/**': { ssr: false },
+
   },
   imports: {
     dirs: ['./stores'],
