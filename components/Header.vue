@@ -16,7 +16,7 @@ defineProps({
     required: false,
     default: true,
   },
-  homepage: {
+  title: {
     type: Boolean,
     required: false,
     default: false,
@@ -30,7 +30,7 @@ const { cartTotalProducts } = storeToRefs(cartStore)
 
 <template>
   <div class=" w-fulll h-20 bg-black shape flex items-center justify-center sm:justify-between lg:pl-15 sm:pr-6 my-3">
-    <div :class="homepage ? 'hidden sm:flex' : 'flex'" class="text-white sm:text-lg font-bold mx-3 ">
+    <div :class="title ? 'hidden sm:flex' : 'flex'" class="text-white text-sm sm:text-2xl font-bold mx-3 ">
       <NuxtLink v-show="homeLink" to="/">
         <span class="underline underline-offset-8">Shop</span>
         <span class="mx-3">/</span>

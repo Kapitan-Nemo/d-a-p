@@ -43,7 +43,7 @@ function addToCart() {
 </script>
 
 <template>
-  <Header :cart-link="true" :homepage="true">
+  <Header :cart-link="true" :title="true">
     {{ product?.title }}
   </Header>
 

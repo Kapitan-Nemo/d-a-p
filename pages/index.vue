@@ -1,5 +1,5 @@
 <template>
-  <Header :home-link="false" :cart-link="true" :homepage="true">
+  <Header :home-link="false" :cart-link="true" :title="true">
     "Pasterz mebli i sprzętów z żelaza, ubrany w prześcieradła"
   </Header>
   <section>
