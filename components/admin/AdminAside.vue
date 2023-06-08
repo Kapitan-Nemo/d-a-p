@@ -1,6 +1,6 @@
 <template>
-  <aside id="sidebar" class="fixed top-0 left-0 z-20 flex flex-col w-64 h-full pt-18 lg:flex" aria-label="Sidebar">
-    <div class="flex flex-col pt-0 bg-black h-full">
+  <aside id="sidebar" class="flex flex-col w-64 h-full bg-dark-100" aria-label="Sidebar">
+    <div class="flex flex-col pt-0 h-screen">
       <ul class="p-3">
         <li class="mb-3">
           <nuxt-link to="/admin" class="flex items-center p-2 text-white">

@@ -1,9 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
-  content: [
-    'node_modules/tailvue/dist/tailvue.es.js',
-  ],
   theme: {
     container: {
       padding: {
@@ -13,6 +10,12 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Courier New', ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        dark: {
+          100: '#141414',
+          200: '#1D1D1D',
+        },
       },
       spacing: {
         1: '5px',
