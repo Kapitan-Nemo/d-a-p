@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const auth = useAuth()
-console.log(auth.userName)
-console.log(auth.userPhoto)
-const photo = auth.userPhoto
 </script>
 
 <template>
@@ -22,7 +19,7 @@ const photo = auth.userPhoto
 
           <div class="flex items-center ml-3">
             <button type="button" class="flex">
-              <img class="w-8 h-8" :src="photo" alt="user photo">
+              <img class="w-8 h-8" :src="auth.userPhoto ? auth.userPhoto : '' " alt="user photo">
             </button>
           </div>
         </div>
