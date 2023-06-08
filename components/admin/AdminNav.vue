@@ -9,7 +9,6 @@ const auth = useAuth()
         <div class="flex items-center justify-start">
           <div class="flex ml-2">
             <span class="text-2xl font-bold text-white">D-A-P</span>
-            {{ auth.userName }}
           </div>
         </div>
         <div class="flex items-center">

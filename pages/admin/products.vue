@@ -1,3 +1,14 @@
+<script setup lang="ts">
+definePageMeta({
+  middleware: [
+    'admin',
+    // Add in more middleware here
+  ],
+})
+</script>
+
 <template>
-  <p>Admin products</p>
+  <p class="text-white">
+    Admin products
+  </p>
 </template>
