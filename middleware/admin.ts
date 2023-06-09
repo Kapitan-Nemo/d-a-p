@@ -1,7 +1,6 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const auth = useAuth()
-  console.log(to, from)
-
+  // FIXME: auth.logged only for admins
   if (!auth.logged)
     return navigateTo('/')
 })
