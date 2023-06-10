@@ -7,6 +7,7 @@ definePageMeta({
   ],
 })
 const { data: albums } = await useFetch('/api/albums')
+console.log(albums.value)
 // const albumsData = ref(albums)
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
@@ -16,11 +17,11 @@ function selectAll() {
   selectedAll.value = !selectedAll.value
 }
 
-const sortColumn = ref('ID')
+const sortColumn = ref('')
 const sortDirection = ref(1)
 // const arrowIconName = ref('arrow_drop_up')
 
-function sortByColumn(columnName: any) {
+function sortByColumn(columnName: string) {
   sortColumn.value = columnName
   sortDirection.value = -1 * sortDirection.value
 
@@ -45,19 +46,16 @@ function sortByColumn(columnName: any) {
               <input id="checkbox-all" v-model="selectedAll" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 " @click="selectAll">
             </div>
           </th>
-          <th scope="col" class="px-6 py-3" @click="sortByColumn('ID')">
-            ID
-          </th>
           <th scope="col" class="px-6 py-3">
             Product name
           </th>
           <th scope="col" class="px-6 py-3">
             Category
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3" @click="sortByColumn('price')">
             Price
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3" @click="sortByColumn('quantityInWarehouse')">
             Stock
           </th>
           <th scope="col" class="px-6 py-3">
@@ -71,9 +69,6 @@ function sortByColumn(columnName: any) {
             <div class="flex items-center">
               <input :id="product.title" v-model="selectedProducts" :value="product" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             </div>
-          </td>
-          <td class="px-6 py-4">
-            {{ product.id }}
           </td>
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
             {{ product.title }}
