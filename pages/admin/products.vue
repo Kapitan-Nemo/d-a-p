@@ -23,7 +23,9 @@ const sortDirection = ref(1)
 
 function sortByColumn(columnName: string) {
   sortColumn.value = columnName
+  console.log(sortDirection.value)
   sortDirection.value = -1 * sortDirection.value
+  console.log(sortDirection.value)
 
   if (sortDirection.value === 1) {
     // arrowIconName.value = 'arrow_drop_up'
