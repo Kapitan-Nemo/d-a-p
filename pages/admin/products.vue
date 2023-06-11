@@ -17,33 +17,20 @@ function selectAll() {
   selectedAll.value = !selectedAll.value
 }
 
-const sortDirection = ref(true)
-// const defaultSorting = ref('asc')
-
 function sortByColumn(e: Event, columnName: string) {
-  sortDirection.value = !sortDirection.value
-  document.querySelectorAll('th').forEach((column) => {
-    column.removeAttribute('data-dir')
-  })
-
-  e.target && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
-
   const direction = ((e.target as HTMLButtonElement).getAttribute('data-dir'))
 
-  // FIXME: sorting is not working properly
+  // Clean all data-dir attributes values
+  if (direction === '') {
+    document.querySelectorAll('th').forEach((column) => {
+      column.setAttribute('data-dir', '')
+    })
+  }
 
+  // FIXME: fix typing
   direction === 'asc'
     ? albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
     : albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
-
-  // if ((e.target as HTMLButtonElement).getAttribute('data-dir') === 'desc') {
-  //   (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
-  //   albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1))
-  // }
-  // else {
-  //   (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
-  //   albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1))
-  // }
 }
 </script>
 
@@ -63,10 +50,10 @@ function sortByColumn(e: Event, columnName: string) {
           <th scope="col" class="px-6 py-3">
             Category
           </th>
-          <th scope="col" class="px-6 py-3" @click="sortByColumn($event, 'price')">
+          <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'price')">
             Price
           </th>
-          <th scope="col" class="px-6 py-3" @click="sortByColumn($event, 'quantityInWarehouse')">
+          <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'quantityInWarehouse')">
             Stock
           </th>
           <th scope="col" class="px-6 py-3">
