@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type IAlbum from '~/components/constants/interface'
 
+// const attrs = useAttrs()
 definePageMeta({
   middleware: [
     'admin',
   ],
 })
 const { data: albums } = await useFetch('/api/albums')
-console.log(albums.value)
-// const albumsData = ref(albums)
+
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
 
@@ -17,24 +17,33 @@ function selectAll() {
   selectedAll.value = !selectedAll.value
 }
 
-const sortColumn = ref('')
-const sortDirection = ref(1)
-// const arrowIconName = ref('arrow_drop_up')
+const sortDirection = ref(true)
+// const defaultSorting = ref('asc')
 
-function sortByColumn(columnName: string) {
-  sortColumn.value = columnName
-  console.log(sortDirection.value)
-  sortDirection.value = -1 * sortDirection.value
-  console.log(sortDirection.value)
+function sortByColumn(e: Event, columnName: string) {
+  sortDirection.value = !sortDirection.value
+  document.querySelectorAll('th').forEach((column) => {
+    column.removeAttribute('data-dir')
+  })
 
-  if (sortDirection.value === 1) {
-    // arrowIconName.value = 'arrow_drop_up'
-    albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1))
-  }
-  else {
-    // arrowIconName.value = 'arrow_drop_down'
-    albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1))
-  }
+  e.target && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
+
+  const direction = ((e.target as HTMLButtonElement).getAttribute('data-dir'))
+
+  // FIXME: sorting is not working properly
+
+  direction === 'asc'
+    ? albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
+    : albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
+
+  // if ((e.target as HTMLButtonElement).getAttribute('data-dir') === 'desc') {
+  //   (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
+  //   albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1))
+  // }
+  // else {
+  //   (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
+  //   albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1))
+  // }
 }
 </script>
 
@@ -54,10 +63,10 @@ function sortByColumn(columnName: string) {
           <th scope="col" class="px-6 py-3">
             Category
           </th>
-          <th scope="col" class="px-6 py-3" @click="sortByColumn('price')">
+          <th scope="col" class="px-6 py-3" @click="sortByColumn($event, 'price')">
             Price
           </th>
-          <th scope="col" class="px-6 py-3" @click="sortByColumn('quantityInWarehouse')">
+          <th scope="col" class="px-6 py-3" @click="sortByColumn($event, 'quantityInWarehouse')">
             Stock
           </th>
           <th scope="col" class="px-6 py-3">
