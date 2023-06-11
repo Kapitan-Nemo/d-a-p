@@ -8,6 +8,7 @@ definePageMeta({
   ],
 })
 const { data: albums } = await useFetch('/api/albums')
+const products = albums.value as IAlbum[]
 
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
@@ -17,20 +18,19 @@ function selectAll() {
   selectedAll.value = !selectedAll.value
 }
 
-function sortByColumn(e: Event, columnName: string) {
+function sortByColumn(e: Event, column: string) {
   const direction = ((e.target as HTMLButtonElement).getAttribute('data-dir'))
 
   // Clean all data-dir attributes values
   if (direction === '') {
-    document.querySelectorAll('th').forEach((column) => {
-      column.setAttribute('data-dir', '')
+    document.querySelectorAll('th').forEach((c) => {
+      c.setAttribute('data-dir', '')
     })
   }
 
-  // FIXME: fix typing
   direction === 'asc'
-    ? albums.value.sort((a, b) => (a[columnName] > b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
-    : albums.value.sort((a, b) => (a[columnName] < b[columnName] ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
+    ? products.sort((a, b) => ((column === 'title' ? a.title > b.title : column === 'price' ? a.price > b.price : a.quantityInWarehouse > b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
+    : products.sort((a, b) => ((column === 'title' ? a.title < b.title : column === 'price' ? a.price < b.price : a.quantityInWarehouse < b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
 }
 </script>
 
@@ -44,7 +44,7 @@ function sortByColumn(e: Event, columnName: string) {
               <input id="checkbox-all" v-model="selectedAll" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 " @click="selectAll">
             </div>
           </th>
-          <th scope="col" class="px-6 py-3">
+          <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'title')">
             Product name
           </th>
           <th scope="col" class="px-6 py-3">
@@ -53,7 +53,7 @@ function sortByColumn(e: Event, columnName: string) {
           <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'price')">
             Price
           </th>
-          <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'quantityInWarehouse')">
+          <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'stock')">
             Stock
           </th>
           <th scope="col" class="px-6 py-3">
