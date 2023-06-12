@@ -36,7 +36,7 @@ function createUser() {
       auth.userZipCode = user.value.zipCode
       auth.userPhone = user.value.phone
 
-      useToast('User crated', 'success')
+      useToast(`User ${auth.userName} sign up`, 'success')
     })
     .catch((error) => {
       useToast(error.code, 'error')
