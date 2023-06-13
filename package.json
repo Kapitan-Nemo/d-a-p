@@ -13,18 +13,18 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.11",
     "@stripe/stripe-js": "^1.54.0",
-    "firebase": "^9.22.1",
+    "firebase": "^9.22.2",
     "firebase-admin": "^11.9.0",
     "nuxt-swiper": "^1.1.0",
     "pinia": "^2.1.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.5",
-    "@nuxtjs/tailwindcss": "^6.7.0",
+    "@nuxtjs/tailwindcss": "^6.7.2",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^20",
     "eslint": "^8.42.0",
     "nuxt": "^3.5.3",
-    "sass": "^1.62.1"
+    "sass": "^1.63.3"
   }
 }
