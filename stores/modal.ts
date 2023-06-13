@@ -11,4 +11,4 @@ export const useModal = defineStore('modal', {
 })
 
 if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useCart, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useModal, import.meta.hot))
