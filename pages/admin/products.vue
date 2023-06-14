@@ -1,23 +1,33 @@
 <script setup lang="ts">
+import { collection, getFirestore, onSnapshot } from '@firebase/firestore'
 import type IAlbum from '~/components/constants/interface'
 import DEFAULT_PRODUCT from '~/utils/constants'
 
-// const attrs = useAttrs()
 definePageMeta({
   middleware: [
     'admin',
   ],
 })
-const { data: albums } = await useFetch('/api/albums')
 
-const products = albums.value as IAlbum[]
+const products = ref<IAlbum[]>([])
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
 const currentEdit = ref<IAlbum>(DEFAULT_PRODUCT)
 const editMode = ref(false)
 
+onMounted(async () => {
+  const docRef = collection(getFirestore(), 'albums/')
+  products.value = []
+  onSnapshot(docRef, (snap) => {
+    snap.forEach((doc) => {
+      console.log(doc.id, ' => ', doc.data())
+      products.value?.push(doc.data() as IAlbum)
+    })
+  })
+})
+
 function selectAll() {
-  selectedAll.value ? selectedProducts.value = [] : selectedProducts.value = albums.value as IAlbum[]
+  selectedAll.value ? selectedProducts.value = [] : selectedProducts.value = products.value as IAlbum[]
   selectedAll.value = !selectedAll.value
 }
 
@@ -32,8 +42,8 @@ function sortByColumn(e: Event, column: string) {
   }
 
   direction === 'asc'
-    ? products.sort((a, b) => ((column === 'title' ? a.title > b.title : column === 'price' ? a.price > b.price : a.quantityInWarehouse > b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
-    : products.sort((a, b) => ((column === 'title' ? a.title < b.title : column === 'price' ? a.price < b.price : a.quantityInWarehouse < b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
+    ? products.value.sort((a, b) => ((column === 'title' ? a.title > b.title : column === 'price' ? a.price > b.price : a.quantityInWarehouse > b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
+    : products.value.sort((a, b) => ((column === 'title' ? a.title < b.title : column === 'price' ? a.price < b.price : a.quantityInWarehouse < b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
 }
 
 function editProduct(product: IAlbum) {
