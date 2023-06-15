@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// const cartStore = useCart()
 const { data: albums } = await useFetch('/api/albums')
 </script>
 
@@ -28,7 +27,6 @@ const { data: albums } = await useFetch('/api/albums')
 
 <style lang="scss">
 .album {
-  // max-height: 250px;
   object-fit: cover;
   @media screen and (min-width: 1024px) {
     max-width: 250px;

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-// const cartStore = useCart()
 const { data: albums } = await useFetch('/api/albums')
-// TODO: move to pinia
 </script>
 
 <template>

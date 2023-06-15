@@ -40,7 +40,6 @@ function sortByColumn(e: Event, column: string) {
       c.setAttribute('data-dir', '')
     })
   }
-
   direction === 'asc'
     ? products.value.sort((a, b) => ((column === 'title' ? a.title > b.title : column === 'price' ? a.price > b.price : a.quantityInWarehouse > b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
     : products.value.sort((a, b) => ((column === 'title' ? a.title < b.title : column === 'price' ? a.price < b.price : a.quantityInWarehouse < b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
