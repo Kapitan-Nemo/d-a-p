@@ -59,8 +59,8 @@ function editProduct(product: IAlbum) {
 
 <template>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left text-white">
+      <thead class="text-xs uppercase bg-dark-200 text-white">
         <tr>
           <th scope="col" class="p-4">
             <div class="flex items-center">
@@ -91,7 +91,7 @@ function editProduct(product: IAlbum) {
               <input :id="product.title" v-model="selectedProducts" :value="product" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             </div>
           </td>
-          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
             {{ product.title }}
           </th>
           <td class="px-6 py-4">
@@ -116,7 +116,7 @@ function editProduct(product: IAlbum) {
     </table>
   </div>
   <!-- drawer component -->
-  <div id="drawer-example" :class="editMode ? 'transform-none' : '-translate-x-full'" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-white w-80 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
+  <div id="drawer-example" :class="editMode ? 'transform-none' : '-translate-x-full'" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-dark-200" tabindex="-1" aria-labelledby="drawer-label">
     <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
       <svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>Info
     </h5>
@@ -124,7 +124,7 @@ function editProduct(product: IAlbum) {
       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
     </button>
     <div class="flex flex-col">
-      <input v-model="currentEdit.title" class="mb-3" type="text">
+      <input v-model="currentEdit.title" class="mb-3 w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 focus:outline-none" type="text">
       <textarea v-model="currentEdit.description" class="mb-3" type="textarea" />
       <input v-model="currentEdit.price" class="mb-3" type="text">
       <input v-model="currentEdit.quantityInWarehouse" class="mb-3" type="text">
