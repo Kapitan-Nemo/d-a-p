@@ -51,10 +51,10 @@ function editProduct(product: IAlbum) {
   editMode.value = !editMode.value
 }
 
-// function updateProduct(product: IAlbum) {
-//   console.log('fire updateProduct')
-//   console.log(product)
-// }
+function updateProduct(id: number) {
+  console.log('fire updateProduct')
+  console.log(id)
+}
 </script>
 
 <template>
@@ -124,14 +124,20 @@ function editProduct(product: IAlbum) {
       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
     </button>
     <div class="flex flex-col">
+      <label class="font-bold text-white text-xl">Title:</label>
       <textarea v-model="currentEdit.title" rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
+      <label class="font-bold text-white text-xl">Description:</label>
       <textarea v-model="currentEdit.description" rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
+      <label class="font-bold text-white text-xl">Price:</label>
       <input v-model="currentEdit.price" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+      <label class="font-bold text-white text-xl">Quantity:</label>
       <input v-model="currentEdit.quantityInWarehouse" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+      <label class="font-bold text-white text-xl">Feautred:</label>
       <input v-model="currentEdit.featured" type="checkbox" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
       <!-- TODO:  image uploader -->
+      <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
-      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded">
+      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
         Update
       </button>
     </div>
