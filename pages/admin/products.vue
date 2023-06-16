@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { collection, getFirestore, onSnapshot } from '@firebase/firestore'
+import { collection, doc, getFirestore, onSnapshot, updateDoc } from '@firebase/firestore'
 import type IAlbum from '~/components/constants/interface'
 import DEFAULT_PRODUCT from '~/utils/constants'
 
@@ -16,11 +16,9 @@ const currentEdit = ref<IAlbum>(DEFAULT_PRODUCT)
 const editMode = ref(false)
 
 onMounted(async () => {
-  const docRef = collection(getFirestore(), 'albums/')
   products.value = []
-  onSnapshot(docRef, (snap) => {
+  onSnapshot(collection(getFirestore(), 'albums/'), (snap) => {
     snap.forEach((doc) => {
-      console.log(doc.id, ' => ', doc.data())
       products.value?.push(doc.data() as IAlbum)
     })
   })
@@ -46,14 +44,18 @@ function sortByColumn(e: Event, column: string) {
 }
 
 function editProduct(product: IAlbum) {
-  console.log(product)
   currentEdit.value = product
   editMode.value = !editMode.value
 }
 
-function updateProduct(id: number) {
-  console.log('fire updateProduct')
-  console.log(id)
+async function updateProduct(id: string) {
+  await updateDoc(doc(getFirestore(), 'albums', id), {
+    ...currentEdit.value,
+  }).then(() => {
+    useToast('Product updated successfully', 'success')
+  }).catch((error) => {
+    console.error('Error updating document: ', error)
+  })
 }
 </script>
 
@@ -137,7 +139,7 @@ function updateProduct(id: number) {
       <!-- TODO:  image uploader -->
       <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
-      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
+      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct('4iooZJRsjap1a8NwQHLw')">
         Update
       </button>
     </div>

@@ -1,5 +1,5 @@
 export default interface IAlbum {
-  id: number
+  id: string
   stripeId: string
   title: string
   slug: string | string[]

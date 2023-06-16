@@ -1,5 +1,5 @@
 const DEFAULT_PRODUCT = {
-  id: 0,
+  id: '',
   stripeId: '',
   title: '',
   slug: '',

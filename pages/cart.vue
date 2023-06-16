@@ -12,12 +12,12 @@ const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
 
-function removeFromCart(id: number) {
+function removeFromCart(id: string) {
   cart.value.splice(cart.value.findIndex(e => e.id === id), 1)
   cartTotalProducts.value = cart.value.length
 }
 
-function changeQuantity(id: number, op: boolean) {
+function changeQuantity(id: string, op: boolean) {
   const album = cart.value.find(e => e.id === id)
   if (op && album)
     album.quantityInCart += 1
