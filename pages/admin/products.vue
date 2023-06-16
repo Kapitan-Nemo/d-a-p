@@ -124,14 +124,14 @@ function editProduct(product: IAlbum) {
       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
     </button>
     <div class="flex flex-col">
-      <input v-model="currentEdit.title" class="mb-3 w-full border-b border-black h-8 text-black caret-black placeholder-gray-500 focus:outline-none" type="text">
-      <textarea v-model="currentEdit.description" class="mb-3" type="textarea" />
-      <input v-model="currentEdit.price" class="mb-3" type="text">
-      <input v-model="currentEdit.quantityInWarehouse" class="mb-3" type="text">
-      <input v-model="currentEdit.featured" type="checkbox" class="mb-3">
+      <input v-model="currentEdit.title" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+      <textarea v-model="currentEdit.description" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
+      <input v-model="currentEdit.price" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+      <input v-model="currentEdit.quantityInWarehouse" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+      <input v-model="currentEdit.featured" type="checkbox" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
       <img :src="`/images/${currentEdit.image}`" alt="product image">
       <!-- TODO: image uploader -->
-      <button class="mt-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      <button class="mt-3 bg-red-300 hover:bg-red-600 text-black font-bold py-2 px-4 rounded">
         Update
       </button>
     </div>
