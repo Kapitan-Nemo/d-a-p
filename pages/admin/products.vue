@@ -55,6 +55,7 @@ async function updateProduct(id: string) {
     useToast('Product updated successfully', 'success')
   }).catch((error) => {
     console.error('Error updating document: ', error)
+    useToast('Error updating document', 'error')
   })
 }
 </script>
@@ -71,9 +72,6 @@ async function updateProduct(id: string) {
           </th>
           <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'title')">
             Product name
-          </th>
-          <th scope="col" class="px-6 py-3">
-            Category
           </th>
           <th data-dir="" scope="col" class="px-6 py-3" @click="sortByColumn($event, 'price')">
             Price
@@ -96,9 +94,6 @@ async function updateProduct(id: string) {
           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
             {{ product.title }}
           </th>
-          <td class="px-6 py-4">
-            Category
-          </td>
           <td class="px-6 py-4">
             {{ product.price }}
           </td>
@@ -139,7 +134,7 @@ async function updateProduct(id: string) {
       <!-- TODO:  image uploader -->
       <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
-      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct('4iooZJRsjap1a8NwQHLw')">
+      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
         Update
       </button>
     </div>
