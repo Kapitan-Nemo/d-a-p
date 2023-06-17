@@ -4,7 +4,7 @@ const DEFAULT_PRODUCT = {
   title: '',
   slug: '',
   description: '',
-  image: '',
+  image: '/placeholder-400x400.png',
   quantityInWarehouse: 0,
   quantityInCart: 0,
   price: 0,
