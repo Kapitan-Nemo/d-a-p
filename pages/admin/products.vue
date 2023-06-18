@@ -46,6 +46,7 @@ function sortByColumn(e: Event, column: string) {
 function editProduct(product: IAlbum) {
   currentEdit.value = product
   editMode.value = !editMode.value
+  editMode.value ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden')
 }
 
 async function updateProduct(id: string) {
@@ -138,9 +139,20 @@ async function updateProduct(id: string) {
       <!-- TODO:  image uploader -->
       <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
-      <button class="mt-3 bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
+      <button class="update-product bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
         Update
       </button>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.update-product {
+  position: fixed;
+  bottom: 10px;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
