@@ -130,7 +130,11 @@ async function updateProduct(id: string) {
       <label class="font-bold text-white text-xl">Quantity:</label>
       <input v-model="currentEdit.quantityInWarehouse" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
       <label class="font-bold text-white text-xl">Feautred:</label>
-      <input v-model="currentEdit.featured" type="checkbox" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
+      <div class="flex justify-start items-center mb-3">
+        <input id="featured" v-model="currentEdit.featured" type="checkbox" class="border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
+        <label for="featured" class="text-white ml-3">{{ currentEdit.featured ? 'YES' : 'NO' }}</label>
+      </div>
+
       <!-- TODO:  image uploader -->
       <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
