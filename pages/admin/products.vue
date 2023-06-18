@@ -46,8 +46,11 @@ function sortByColumn(e: Event, column: string) {
 function editProduct(product: IAlbum) {
   currentEdit.value = product
   editMode.value = !editMode.value
-  editMode.value ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden')
 }
+
+watch(() => editMode.value, () => {
+  editMode.value ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden')
+})
 
 async function updateProduct(id: string) {
   await updateDoc(doc(getFirestore(), 'albums', id), {
