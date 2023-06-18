@@ -14,6 +14,7 @@ const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
 const currentEdit = ref<IAlbum>(DEFAULT_PRODUCT)
 const editMode = ref(false)
+const search = ref('')
 
 onMounted(async () => {
   products.value = []
@@ -23,6 +24,21 @@ onMounted(async () => {
     })
   })
 })
+
+const filterProducts = computed(() => {
+  return products.value.filter(product => product.title.toLowerCase().includes(search.value.toLowerCase()))
+})
+
+// function deleteProduct(id: string) {
+//   updateDoc(doc(getFirestore(), 'albums', id), {
+//     deleted: true,
+//   }).then(() => {
+//     useToast('Product deleted successfully', 'success')
+//   }).catch((error) => {
+//     console.error('Error updating document: ', error)
+//     useToast('Error updating document', 'error')
+//   })
+// }
 
 function selectAll() {
   selectedAll.value ? selectedProducts.value = [] : selectedProducts.value = products.value as IAlbum[]
@@ -65,7 +81,8 @@ async function updateProduct(id: string) {
 </script>
 
 <template>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <input v-model="search" class="mb-3  border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="search">
+  <div class="relative overflow-x-auto shadow-md">
     <table class="w-full text-sm text-left text-white">
       <thead class="text-xs uppercase bg-dark-200 text-white">
         <tr>
@@ -89,7 +106,7 @@ async function updateProduct(id: string) {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in products" :key="product.id">
+        <tr v-for="product in filterProducts" :key="product.id">
           <td class="w-4 p-4">
             <div class="flex items-center">
               <input :id="product.title" v-model="selectedProducts" :value="product" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
