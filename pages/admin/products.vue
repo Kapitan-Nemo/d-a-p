@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { collection, doc, getFirestore, onSnapshot, updateDoc } from '@firebase/firestore'
+import { collection, getFirestore, onSnapshot } from '@firebase/firestore'
+import { addDoc } from 'firebase/firestore'
 import type IAlbum from '~/components/constants/interface'
 import DEFAULT_PRODUCT from '~/utils/constants'
 
@@ -68,20 +69,31 @@ watch(() => editMode.value, () => {
   editMode.value ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden')
 })
 
-async function updateProduct(id: string) {
-  await updateDoc(doc(getFirestore(), 'albums', id), {
+// async function updateProduct(id: string) {
+//   await updateDoc(doc(getFirestore(), 'albums', id), {
+//     ...currentEdit.value,
+//   }).then(() => {
+//     useToast('Product updated successfully', 'success')
+//   }).catch((error) => {
+//     console.error('Error updating document: ', error)
+//     useToast('Error updating document', 'error')
+//   })
+// }
+
+async function createProduct() {
+  console.log(currentEdit.value)
+  const docRef = await addDoc(collection(getFirestore(), 'albums'), {
     ...currentEdit.value,
-  }).then(() => {
-    useToast('Product updated successfully', 'success')
-  }).catch((error) => {
-    console.error('Error updating document: ', error)
-    useToast('Error updating document', 'error')
   })
+  console.log('Document written with ID: ', docRef.id)
 }
 </script>
 
 <template>
   <input v-model="search" class="mb-3  border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="search">
+  <button class="mb-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="editMode = !editMode">
+    Add new product
+  </button>
   <div class="relative overflow-x-auto shadow-md">
     <table class="w-full text-sm text-left text-white">
       <thead class="text-xs uppercase bg-dark-200 text-white">
@@ -159,11 +171,16 @@ async function updateProduct(id: string) {
       <!-- TODO:  image uploader -->
       <label class="font-bold text-white text-xl">Image:</label>
       <img :src="`/images/${currentEdit.image}`" alt="product image">
-      <button class="update-product bg-black text-white font-bold py-2 px-4 rounded" @click="updateProduct(currentEdit.id)">
+      <!-- <button class="update-product bg-black text-white font-bold py-2 px-4" @click="updateProduct(currentEdit.id)">
         Update
+      </button> -->
+      <button class="create-product bg-black text-white font-bold py-2 px-4" @click="createProduct()">
+        Create
       </button>
     </div>
   </div>
+
+  <!-- create component -->
 </template>
 
 <style lang="scss" scoped>
