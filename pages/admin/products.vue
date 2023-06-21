@@ -18,10 +18,12 @@ const editProduct = ref<IAlbum>(DEFAULT_PRODUCT)
 const editMode = ref(false)
 const search = ref('')
 
-onMounted(async () => {
-  products.value = []
+onMounted(() => {
+  console.log('mounted')
   onSnapshot(collection(getFirestore(), 'albums/'), (snap) => {
+    products.value = []
     snap.forEach((doc) => {
+      console.log('fire up!')
       products.value?.push(doc.data() as IAlbum)
     })
   })
@@ -73,7 +75,6 @@ async function updateProduct(id: string) {
 async function deleteProduct(id: string) {
   await deleteDoc(doc(getFirestore(), 'albums', id)).then(() => {
     useToast('Product deleted successfully', 'success')
-    products.value = []
   }).catch((error) => {
     console.error('Error removing document: ', error)
     useToast('Error removing document', 'error')
