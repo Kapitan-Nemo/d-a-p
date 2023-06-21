@@ -18,7 +18,12 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
     'nuxt-swiper',
+    'nuxt-svgo',
   ],
+  svgo: {
+    global: false,
+  },
+
   swiper: {
     modules: ['free-mode'],
   },

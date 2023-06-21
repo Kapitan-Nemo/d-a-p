@@ -11,19 +11,17 @@ definePageMeta({
 })
 
 const products = ref<IAlbum[]>([])
+const editProduct = ref<IAlbum>(DEFAULT_PRODUCT)
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
-const editProduct = ref<IAlbum>(DEFAULT_PRODUCT)
-// const createProduct = ref<IAlbum>(DEFAULT_PRODUCT)
+
 const editMode = ref(false)
 const search = ref('')
 
 onMounted(() => {
-  console.log('mounted')
   onSnapshot(collection(getFirestore(), 'albums/'), (snap) => {
     products.value = []
     snap.forEach((doc) => {
-      console.log('fire up!')
       products.value?.push(doc.data() as IAlbum)
     })
   })
@@ -118,10 +116,13 @@ async function saveProduct() {
 </script>
 
 <template>
-  <input v-model="search" class="mb-3  border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="search">
-  <button class="mb-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="createProduct">
-    Add new product
-  </button>
+  <div class="flex justify-between">
+    <input v-model="search" placeholder="Search product" class="px-3 py-3 mb-3 border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="search">
+    <button @click="createProduct">
+      <svgo-actions-add class="text-5xl text-red-300" />
+    </button>
+  </div>
+
   <div class="relative overflow-x-auto shadow-md">
     <table class="w-full text-sm text-left text-white">
       <thead class="text-xs uppercase bg-dark-200 text-white">

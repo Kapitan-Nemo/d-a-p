@@ -66,7 +66,7 @@ onMounted(() => {
   <div v-if="!auth.logged && !modal.createAccount" class="flex items-center flex-col">
     <div class="google-btn cursor-pointer" @click="singGoogle">
       <div class="google-icon-wrapper">
-        <img class="google-icon" src="~/assets/svg/google-logo.svg">
+        <img class="google-icon" src="~/assets/icons/google-logo.svg">
       </div>
       <p class="btn-text">
         <strong>Sign in with google</strong>
