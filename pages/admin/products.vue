@@ -188,44 +188,47 @@ async function updateProduct(id: string) {
   <!-- drawer component -->
   <div :class="editMode ? 'transform-none' : '-translate-x-full'" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-dark-200">
     <h5 class="inline-flex items-center mb-4 text-base font-semibold text-white">
-      <svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>Info
+      <svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+      {{ createMode ? 'Create' : 'Update' }} product
     </h5>
     <button type="button" class="text-white hover:bg-dark-100 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center" @click="editMode = !editMode">
       <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
     </button>
     <div class="flex flex-col">
-      <label class="font-bold text-white text-xl">Title:</label>
-      <textarea v-model="editProduct.title" rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
-      <label class="font-bold text-white text-xl">Description:</label>
-      <textarea v-model="editProduct.description" rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
-      <label class="font-bold text-white text-xl">Price:</label>
-      <input v-model="editProduct.price" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
-      <label class="font-bold text-white text-xl">Quantity:</label>
-      <input v-model="editProduct.quantityInWarehouse" class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
-      <label class="font-bold text-white text-xl">Feautred:</label>
-      <div class="flex justify-start items-center mb-3">
-        <input id="featured" v-model="editProduct.featured" type="checkbox" class="border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
-        <label for="featured" class="text-white ml-3">{{ editProduct.featured ? 'YES' : 'NO' }}</label>
-      </div>
-
-      <!-- TODO:  image uploader -->
-      <label class="font-bold text-white text-xl">Image:</label>
-      <img :src="`/images/${editProduct.image}`" alt="product image">
-      <button v-if="createMode" class="btn-product bg-black text-white font-bold py-2 px-4" @click="saveProduct">
-        Save
-      </button>
-      <button v-else class="btn-product bg-black text-white font-bold py-2 px-4" @click="updateProduct(editProduct.id)">
-        Update
-      </button>
+      <form id="save_product" class="flex" @submit.prevent="saveProduct">
+        <div class="w-1/2">
+          <label for="title" class="font-bold text-white text-xl">Title:</label>
+          <textarea v-model="editProduct.title" name="title" required rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
+          <label class="font-bold text-white text-xl">Description:</label>
+          <textarea v-model="editProduct.description" required rows="3" cols="40" class="mb-3 w-full border-b border-white bg-dark-200 text-white caret-white placeholder-gray-500 focus:outline-none" type="textarea" />
+          <label class="font-bold text-white text-xl">Price:</label>
+          <input v-model="editProduct.price" required class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+          <label class="font-bold text-white text-xl">Quantity:</label>
+          <input v-model="editProduct.quantityInWarehouse" required class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+          <label class="font-bold text-white text-xl">Feautred:</label>
+          <div class="flex justify-start items-center mb-3">
+            <input id="featured" v-model="editProduct.featured" type="checkbox" class="border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">
+            <label for="featured" class="text-white ml-3">{{ editProduct.featured ? 'YES' : 'NO' }}</label>
+          </div>
+          <button v-if="createMode" class="btn-product bg-black text-white font-bold py-2 px-4">
+            Save
+          </button>
+          <button v-else class="btn-product bg-black text-white font-bold py-2 px-4" @click="updateProduct(editProduct.id)">
+            Update
+          </button>
+        </div>
+        <div class="w-1/2 ml-6 mb-6">
+          <!-- TODO:  image uploader -->
+          <label class="font-bold text-white text-xl">Image:</label>
+          <img class="w-96 h-96" :src="`/images/${editProduct.image}`" alt="product image">
+        </div>
+      </form>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .btn-product {
-  position: fixed;
-  bottom: 10px;
-  width: 400px;
   display: flex;
   align-items: center;
   justify-content: center;

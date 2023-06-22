@@ -30,6 +30,6 @@ export default async function useToast(message: string, type: string, duration?:
       }
     }
   }).catch((error) => {
-    console.log(error)
+    console.error(error)
   })
 }

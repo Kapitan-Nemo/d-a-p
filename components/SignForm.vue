@@ -30,7 +30,6 @@ function singEmail() {
       useToast('Login success', 'success')
       getDoc(doc(getFirestore(), 'users', auth.userId)).then((doc) => {
         if (doc.exists()) {
-          console.log('Document data:', doc.data())
           auth.userName = doc.data().name
           auth.userLastName = doc.data().lastName
           auth.userStreet = doc.data().street
