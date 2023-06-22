@@ -40,10 +40,10 @@ const { cartTotalProducts } = storeToRefs(cartStore)
       </h1>
     </div>
     <div v-show="cartLink" class="flex items-center">
-      <img src="~/assets/icons/user.svg" class="cursor-pointer mr-6" alt="user settings" @click="modal.toggleModal()">
+      <svgo-user class="cursor-pointer mr-6 text-white text-4xl" @click="modal.toggleModal()" />
       <Nuxt-Link to="/cart" class="text-white">
         <div class="relative flex">
-          <img src="~/assets/icons/cart.svg" alt="cart" class="cart-icon">
+          <svgo-cart class="cart-icon text-white text-4xl" />
           <ClientOnly>
             <template #fallback>
               <span class="bg-white rounded-full h-4 w-4 flex text-black items-center justify-center absolute -top-2 -right-2 font-bold text-sm">0</span>

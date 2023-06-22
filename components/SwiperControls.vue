@@ -5,10 +5,10 @@ const swiper = useSwiper()
 <template>
   <div class="flex justify-end mt-6">
     <button class="mr-6 bg-black p-2" @click="swiper.slidePrev()">
-      <img src="~/assets/icons/arrow-left.svg" alt="arrow-left">
+      <svgo-arrow-left class="text-white text-2xl" />
     </button>
     <button class="bg-black p-2" @click="swiper.slideNext()">
-      <img src="~/assets/icons/arrow-right.svg" alt="arrow-right">
+      <svgo-arrow-right class="text-white text-2xl" />
     </button>
   </div>
 </template>
