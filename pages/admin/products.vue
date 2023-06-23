@@ -62,7 +62,6 @@ function editProducts(product: IAlbum) {
   editProduct.value = product
   show.value.edit = !show.value.edit
   show.value.create = false
-  console.log(show.value.create)
 }
 
 async function deleteProduct(id: string) {
