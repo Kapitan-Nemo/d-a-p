@@ -14,15 +14,12 @@ const products = ref<IAlbum[]>([])
 const editProduct = ref<IAlbum>(DEFAULT_PRODUCT)
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
-
 const image = useState('image') as Ref<string>
-
+const search = ref('')
 const show = ref({
   edit: false,
   create: false,
 })
-
-const search = ref('')
 
 onMounted(() => {
   onSnapshot(collection(getFirestore(), 'albums/'), (snap) => {
@@ -99,14 +96,14 @@ function createProduct() {
 async function saveProduct(id: string) {
   // Create new product
   if (show.value.create) {
-    const newCityRef = doc(collection(getFirestore(), 'albums'))
+    const albums = doc(collection(getFirestore(), 'albums'))
     const data = {
       ...editProduct.value,
     }
-    data.id = newCityRef.id
+    data.id = albums.id
     data.image = image.value as string
     // set doc with id
-    await setDoc(newCityRef, data)
+    await setDoc(albums, data)
       .then(() => {
         useToast('Product created successfully', 'success')
       })
