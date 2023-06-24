@@ -1,4 +1,6 @@
-export default interface IAlbum {
+import type { Timestamp } from 'firebase-admin/firestore'
+
+export interface IAlbum {
   id: string
   stripeId: string
   title: string
@@ -10,4 +12,13 @@ export default interface IAlbum {
   price: number
   featured: boolean
   link: string
+}
+
+export interface IOrders {
+  date: Timestamp
+  name: string
+  orderID: string
+  price: number
+  status: string
+  userID: string
 }

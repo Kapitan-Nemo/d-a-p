@@ -18,6 +18,7 @@ const auth = useAuth()
 
           <div class="flex items-center ml-3">
             <button type="button" class="flex">
+              <!-- // FIXME: add user photo when auth.userPhoto is empty -->
               <img class="w-8 h-8" :src="auth.userPhoto ? auth.userPhoto : '' " alt="user photo">
             </button>
           </div>

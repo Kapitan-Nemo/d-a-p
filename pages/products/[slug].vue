@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import DEFAULT_PRODUCT from '~/utils/constants'
-import type IAlbum from '~/components/constants/interface'
+import type { IAlbum } from '~/utils/interface'
 
 const cartStore = useCart()
 const route = useRoute()

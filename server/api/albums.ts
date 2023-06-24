@@ -1,5 +1,5 @@
+import type { IAlbum } from 'utils/interface'
 import { firestore } from '@/utils/firebase'
-import type IAlbum from '~/components/constants/interface'
 
 export default defineEventHandler(async () => {
   const ref = firestore.collection('albums/')

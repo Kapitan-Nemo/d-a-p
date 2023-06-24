@@ -1,4 +1,4 @@
-import type IAlbum from '~/components/constants/interface'
+import type { IAlbum } from 'utils/interface'
 
 export const useCart = defineStore('cart', {
   state: () => ({

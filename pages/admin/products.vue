@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { collection, getFirestore, onSnapshot } from '@firebase/firestore'
 import { deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore'
-import type IAlbum from '~/components/constants/interface'
+import type { IAlbum } from '~/utils/interface'
 import DEFAULT_PRODUCT from '~/utils/constants'
 
 definePageMeta({
