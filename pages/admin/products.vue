@@ -65,6 +65,7 @@ function editProducts(product: IAlbum) {
 }
 
 async function deleteProduct(id: string) {
+  // TODO: REMOVE IMAGE FROM STORAGE
   await deleteDoc(doc(getFirestore(), 'albums', id)).then(() => {
     useToast('Product deleted successfully', 'success')
   }).catch((error) => {
@@ -172,10 +173,12 @@ async function saveProduct(id: string) {
             </div>
           </td>
           <th scope="row" class="px-6 py-4">
-            <img class="w-16 h-16 rounded-full" :src="product.image" :alt="product.title">
+            <img class="w-16 h-16 rounded-full object-cover" :src="product.image" :alt="product.title">
           </th>
           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-            {{ product.title }}
+            <NuxtLink target="_blank" :to="`/products/${product.slug}`">
+              {{ product.title }}
+            </NuxtLink>
           </th>
           <td class="px-6 py-4">
             {{ product.price }}
@@ -228,7 +231,7 @@ async function saveProduct(id: string) {
           <p class="font-bold text-white text-xl">
             Image:
           </p>
-          <img :src="image" class="mb-3">
+          <img :src="image" class="mb-3 w-1/2 h-1/2 object-cover">
           <UploadFile />
         </div>
       </form>

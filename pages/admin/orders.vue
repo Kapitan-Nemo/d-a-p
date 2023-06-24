@@ -12,9 +12,7 @@ const orders = ref<IOrders[]>([])
 const search = ref('')
 
 onMounted(() => {
-  console.log('mounted')
   onSnapshot(collection(getFirestore(), 'orders/'), (snap) => {
-    console.log(snap.docs)
     // orders.value = []
     snap.forEach((doc) => {
       orders.value?.push(doc.data() as IOrders)
@@ -27,19 +25,6 @@ const filterOrders = computed(() => {
   return orders.value.filter(order => order.name.toLowerCase().includes(search.value.toLowerCase()))
 })
 
-// function sortByColumn(e: Event, column: string) {
-//   const direction = ((e.target as HTMLButtonElement).getAttribute('data-dir'))
-
-//   // Clean all data-dir attributes values
-//   if (direction === '') {
-//     document.querySelectorAll('th').forEach((c) => {
-//       c.setAttribute('data-dir', '')
-//     })
-//   }
-//   direction === 'asc'
-//     ? products.value.sort((a, b) => ((column === 'title' ? a.title > b.title : column === 'price' ? a.price > b.price : a.quantityInWarehouse > b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'desc')
-//     : products.value.sort((a, b) => ((column === 'title' ? a.title < b.title : column === 'price' ? a.price < b.price : a.quantityInWarehouse < b.quantityInWarehouse) ? 1 : -1)) && (e.target as HTMLButtonElement).setAttribute('data-dir', 'asc')
-// }
 function editOrder() {
   console.log('edit order')
 }
@@ -54,22 +39,19 @@ function editOrder() {
     <table class="w-full text-sm text-left text-white">
       <thead class="text-xs uppercase bg-dark-200 text-white">
         <tr>
-          <!-- <th data-dir="" scope="col" class="px-6 py-3">
-            Photo
-          </th> -->
-          <th data-dir="" scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3">
             Order ID
           </th>
-          <th data-dir="" scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3">
             Name
           </th>
-          <th data-dir="" scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3">
             Price
           </th>
-          <th data-dir="" scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3">
             Date
           </th>
-          <th data-dir="" scope="col" class="px-6 py-3">
+          <th scope="col" class="px-6 py-3">
             Status
           </th>
           <th scope="col" class="px-6 py-3 text-right">
@@ -79,9 +61,6 @@ function editOrder() {
       </thead>
       <tbody>
         <tr v-for="order in filterOrders" :key="order.date.nanoseconds">
-          <!-- <th scope="row" class="px-6 py-4">
-            <img class="w-16 h-16 rounded-full" :src="product.image" :alt="product.title">
-          </th> -->
           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
             {{ order.orderID }}
           </th>
@@ -95,7 +74,7 @@ function editOrder() {
             {{ order.date.toDate().toLocaleDateString() }}
           </td>
           <td class="px-6 py-4">
-            {{ order.status }}
+            <span class="rounded-xl bg-amber-700 text-white font-bold px-2 py-1">{{ order.status }}</span>
           </td>
           <td class="px-6 py-4 text-right">
             <button class="mr-6" @click="editOrder">
