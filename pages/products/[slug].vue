@@ -1,29 +1,14 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-
+import DEFAULT_PRODUCT from '~/utils/constants'
 import type IAlbum from '~/components/constants/interface'
 
 const cartStore = useCart()
 const route = useRoute()
 
 const { data: albums } = await useFetch('/api/albums')
-// TODO: move to store
 
-// TODO: move to constats
-const defaultProduct = {
-  id: 0,
-  title: '',
-  slug: '',
-  description: '',
-  image: '',
-  quantityInWarehouse: 0,
-  quantityInCart: 0,
-  price: 0,
-  featured: false,
-  link: '',
-}
-
-const product = albums.value?.find(e => e.slug === route.params.slug) ?? defaultProduct
+const product = albums.value?.find(e => e.slug === route.params.slug) ?? DEFAULT_PRODUCT
 
 const indexCart = computed(() => {
   return cartStore.cart.findIndex(e => e.slug === route.params.slug)
