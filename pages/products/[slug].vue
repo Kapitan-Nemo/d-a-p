@@ -49,7 +49,7 @@ function addToCart() {
 
   <section class="flex flex-col lg:flex-row px-3">
     <div class="w-full lg:w-1/2">
-      <img class="mb-3 lg:mb-0" width="861" height="861" :src="`/images/mockup/${product.image}`" :alt="product.title">
+      <img class="mb-3 lg:mb-0" width="861" height="861" :src="`/images/mockup/${product.slug}.png`" :alt="product.title">
     </div>
     <div class="w-full lg:w-1/2 flex items-center justify-center flex-col">
       <p class="text-xl sm:text-2xl font-bold mb-3">

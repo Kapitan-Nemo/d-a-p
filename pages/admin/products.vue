@@ -15,6 +15,8 @@ const editProduct = ref<IAlbum>(DEFAULT_PRODUCT)
 const selectedProducts = ref<IAlbum[]>([])
 const selectedAll = ref(false)
 
+const image = useState('image') as Ref<string>
+
 const show = ref({
   edit: false,
   create: false,
@@ -62,6 +64,7 @@ function editProducts(product: IAlbum) {
   editProduct.value = product
   show.value.edit = !show.value.edit
   show.value.create = false
+  image.value = product.image
 }
 
 async function deleteProduct(id: string) {
@@ -81,16 +84,16 @@ function createProduct() {
     title: '',
     slug: '',
     description: '',
-    image: '/placeholder-400x400.svg',
+    image: 'https://firebasestorage.googleapis.com/v0/b/d-a-p-26405.appspot.com/o/images%2Fplaceholder-400x400.png?alt=media&token=c3c13bf2-b402-4340-9357-146aa02f1ded',
     quantityInWarehouse: 0,
     quantityInCart: 0,
     price: 0,
     featured: false,
     link: '',
   }
+  image.value = editProduct.value.image
   show.value.edit = !show.value.edit
   show.value.create = true
-  console.log(show.value.create)
 }
 
 async function saveProduct(id: string) {
@@ -101,6 +104,7 @@ async function saveProduct(id: string) {
       ...editProduct.value,
     }
     data.id = newCityRef.id
+    data.image = image.value as string
     // set doc with id
     await setDoc(newCityRef, data)
       .then(() => {
@@ -112,7 +116,8 @@ async function saveProduct(id: string) {
       })
   }
   else {
-  // Update product
+    // Update product
+    editProduct.value.image = image.value
     await updateDoc(doc(getFirestore(), 'albums', id), {
       ...editProduct.value,
     }).then(() => {
@@ -170,7 +175,7 @@ async function saveProduct(id: string) {
             </div>
           </td>
           <th scope="row" class="px-6 py-4">
-            <img class="w-16 h-16 rounded-full" :src="`/images/${product.image}`" :alt="product.title">
+            <img class="w-16 h-16 rounded-full" :src="product.image" :alt="product.title">
           </th>
           <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
             {{ product.title }}
@@ -223,11 +228,11 @@ async function saveProduct(id: string) {
           </button>
         </div>
         <div class="w-1/2 ml-6 mb-6">
-          <!-- TODO:  image uploader -->
           <p class="font-bold text-white text-xl">
             Image:
           </p>
-          <img class="w-96 h-96" :src="`/images/${editProduct.image}`" alt="product image">
+          <img :src="image" class="mb-3">
+          <UploadFile />
         </div>
       </form>
     </div>

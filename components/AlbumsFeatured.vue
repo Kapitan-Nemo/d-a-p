@@ -8,7 +8,7 @@ const { data: albums } = await useFetch('/api/albums')
   </h2>
   <div v-for="album in albums?.filter(a => a.featured).slice(0, 3)" :key="album.id" class="mb-6">
     <div class="flex flex-col md:flex-row items-start">
-      <img class="album w-full" width="250" height="250" :src="`/images/${album.image}`" :alt="album.title">
+      <img class="album w-full" width="250" height="250" :src="album.image" :alt="album.title">
       <div class="mt-6 md:mt-0 md:ml-6 leading-4 description flex flex-col justify-between ">
         {{ album.description }}
         <div class="flex flex-col lg:flex-row mt-6">
