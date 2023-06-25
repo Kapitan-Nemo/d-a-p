@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { loadStripe } from '@stripe/stripe-js'
+import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 
-const config = useRuntimeConfig()
+// const config = useRuntimeConfig()
 const cartStore = useCart()
 const { cart, cartTotalProducts } = storeToRefs(cartStore)
-const stripe = await loadStripe(config.public.STRIPE_PK)
+// const stripe = await loadStripe(config.public.STRIPE_PK)
 
-const op = ref(false)
+const operation = ref(false)
 const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
@@ -17,26 +17,41 @@ function removeFromCart(id: string) {
   cartTotalProducts.value = cart.value.length
 }
 
-function changeQuantity(id: string, op: boolean) {
+function changeQuantity(id: string, operation: boolean) {
   const album = cart.value.find(e => e.id === id)
-  if (op && album)
+  if (operation && album)
     album.quantityInCart += 1
-  else if (!op && album && album.quantityInCart > 1)
+  else if (!operation && album && album.quantityInCart > 1)
     album.quantityInCart -= 1
 }
 
 function checkout() {
-  const lineItems = cart.value.map(a => ({
-    price: a.stripeId,
-    quantity: a.quantityInCart,
-  }))
+  // add to firestore
+  const orders = doc(collection(getFirestore(), 'orders'))
+  const data = {
+    ...cart.value,
+  }
+  // set doc with id
+  setDoc(orders, data)
+    .then(() => {
+      useToast('Order created successfully', 'success')
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error)
+      useToast('Error adding document', 'error')
+    })
 
-  stripe?.redirectToCheckout({
-    lineItems,
-    mode: 'payment',
-    successUrl: `https://${window.location.host}/success`,
-    cancelUrl: `https://${window.location.host}/`,
-  })
+  // const stripeValues = cart.value.map(a => ({
+  //   price: a.stripeId,
+  //   quantity: a.quantityInCart,
+  // }))
+
+  // stripeValues?.redirectToCheckout({
+  //   lineItems,
+  //   mode: 'payment',
+  //   successUrl: `https://${window.location.host}/success`,
+  //   cancelUrl: `https://${window.location.host}/`,
+  // })
 }
 </script>
 
@@ -83,12 +98,12 @@ function checkout() {
                 </NuxtLink>
               </td>
               <td class="text-center p-3 font-bold border-b border-r">
-                <button @click="changeQuantity(album.id, op = false)">
+                <button @click="changeQuantity(album.id, operation = false)">
                   -
                 </button>
                 <span class="mx-3"> {{ album.quantityInCart }}</span>
 
-                <button @click="changeQuantity(album.id, op = true)">
+                <button @click="changeQuantity(album.id, operation = true)">
                   +
                 </button>
               </td>
