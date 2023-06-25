@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 
-// const config = useRuntimeConfig()
 const cartStore = useCart()
 const { cart, cartTotalProducts } = storeToRefs(cartStore)
-// const stripe = await loadStripe(config.public.STRIPE_PK)
 
 const operation = ref(false)
 const cartTotalPrice = computed(() => {
@@ -23,35 +20,6 @@ function changeQuantity(id: string, operation: boolean) {
     album.quantityInCart += 1
   else if (!operation && album && album.quantityInCart > 1)
     album.quantityInCart -= 1
-}
-
-function checkout() {
-  // add to firestore
-  const orders = doc(collection(getFirestore(), 'orders'))
-  const data = {
-    ...cart.value,
-  }
-  // set doc with id
-  setDoc(orders, data)
-    .then(() => {
-      useToast('Order created successfully', 'success')
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error)
-      useToast('Error adding document', 'error')
-    })
-
-  // const stripeValues = cart.value.map(a => ({
-  //   price: a.stripeId,
-  //   quantity: a.quantityInCart,
-  // }))
-
-  // stripeValues?.redirectToCheckout({
-  //   lineItems,
-  //   mode: 'payment',
-  //   successUrl: `https://${window.location.host}/success`,
-  //   cancelUrl: `https://${window.location.host}/`,
-  // })
 }
 </script>
 
@@ -127,9 +95,11 @@ function checkout() {
           <p>Number of products: {{ cartTotalProducts }}</p>
           <p>Total price: {{ cartTotalPrice }}</p>
           <p>Delivery: 3$</p>
-          <button class="w-full bg-black text-white text-2xl font-bold py-3 mt-6" @click="checkout()">
-            Checkout
-          </button>
+          <NuxtLink to="/checkout">
+            <button class="w-full bg-black text-white text-2xl font-bold py-3 mt-6">
+              Checkout
+            </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
