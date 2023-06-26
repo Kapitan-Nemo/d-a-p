@@ -29,6 +29,7 @@ export default defineNuxtConfig({
   },
   components: [
     { path: '~/components/admin', prefix: 'Admin' }, '~/components',
+    { path: '~/components/cart', prefix: 'Cart' }, '~/components',
   ],
 
   routeRules: {

@@ -5,9 +5,6 @@ const cartStore = useCart()
 const { cart, cartTotalProducts } = storeToRefs(cartStore)
 
 const operation = ref(false)
-const cartTotalPrice = computed(() => {
-  return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
-})
 
 function removeFromCart(id: string) {
   cart.value.splice(cart.value.findIndex(e => e.id === id), 1)
@@ -87,21 +84,7 @@ function changeQuantity(id: string, operation: boolean) {
           </tbody>
         </table>
       </div>
-      <div class="w-1/2 flex flex-col items-center">
-        <h2 class="text-2xl font-bold mb-3">
-          Your Order
-        </h2>
-        <div class="w-1/2">
-          <p>Number of products: {{ cartTotalProducts }}</p>
-          <p>Total price: {{ cartTotalPrice }}</p>
-          <p>Delivery: 3$</p>
-          <NuxtLink to="/checkout">
-            <button class="w-full bg-black text-white text-2xl font-bold py-3 mt-6">
-              Checkout
-            </button>
-          </NuxtLink>
-        </div>
-      </div>
+      <CartSummary />
     </div>
     <div v-else class="flex items-center justify-center flex-col default-height  ">
       <p class="text-2xl font-bold mb-6">
