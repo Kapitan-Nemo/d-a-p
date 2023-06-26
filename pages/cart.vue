@@ -84,7 +84,7 @@ function changeQuantity(id: string, operation: boolean) {
           </tbody>
         </table>
       </div>
-      <CartSummary />
+      <CartSummary link="checkout" />
     </div>
     <div v-else class="flex items-center justify-center flex-col default-height  ">
       <p class="text-2xl font-bold mb-6">
