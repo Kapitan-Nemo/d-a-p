@@ -14,11 +14,22 @@ export interface IAlbum {
   link: string
 }
 
+export interface IUser {
+  city: string
+  emial: string
+  lastName: string
+  name: string
+  phone: string
+  street: string
+  userID: string
+  zipCode: string
+}
+
 export interface IOrders {
   date: Timestamp
   name: string
   orderID: string
   price: number
+  products: IAlbum[]
   status: string
-  userID: string
 }
