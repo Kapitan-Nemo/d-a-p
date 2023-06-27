@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 
-// import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
+import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 
 defineProps({
   link: {
@@ -18,47 +18,51 @@ const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
 
-function payment() {
-  console.log('payment')
-  console.log(userName.value)
-  console.log(userLastName.value)
-  console.log(userStreet.value)
-  console.log(userCity.value)
-  console.log(userZipCode.value)
-  console.log(userPhone.value)
-  console.log(userId.value)
-  console.log(userEmail.value)
-}
 // const config = useRuntimeConfig()
 // const stripe = await loadStripe(config.public.STRIPE_PK)
 
-// function order() {
-//   const orders = doc(collection(getFirestore(), 'orders'))
-//   const data = {
-//     ...cartStore.cart,
-//   }
-//   // set doc with id
-//   setDoc(orders, data)
-//     .then(() => {
-//       useToast('Order created successfully', 'success')
-//     })
-//     .catch((error) => {
-//       console.error('Error adding document: ', error)
-//       useToast('Error adding document', 'error')
-//     })
+function order() {
+  const orders = doc(collection(getFirestore(), 'orders'))
+  const data = {
+    date: new Date(),
+    name: userName.value,
+    orderID: orders.id,
+    price: cartTotalPrice.value,
+    status: 'Pending',
+    user: {
+      name: userName.value,
+      lastName: userLastName.value,
+      street: userStreet.value,
+      city: userCity.value,
+      zipCode: userZipCode.value,
+      phone: userPhone.value,
+      email: userEmail.value,
+      userID: userId.value,
+    },
+  }
 
-//   // const stripeValues = cart.value.map(a => ({
-//   //   price: a.stripeId,
-//   //   quantity: a.quantityInCart,
-//   // }))
+  // set doc with id
+  setDoc(orders, data)
+    .then(() => {
+      useToast('Order created successfully', 'success')
+    })
+    .catch((error) => {
+      console.error('Error adding document: ', error)
+      useToast('Error adding document', 'error')
+    })
 
-//   // stripeValues?.redirectToCheckout({
-//   //   lineItems,
-//   //   mode: 'payment',
-//   //   successUrl: `https://${window.location.host}/success`,
-//   //   cancelUrl: `https://${window.location.host}/`,
-//   // })
-// }
+  // const stripeValues = cart.value.map(a => ({
+  //   price: a.stripeId,
+  //   quantity: a.quantityInCart,
+  // }))
+
+  // stripeValues?.redirectToCheckout({
+  //   lineItems,
+  //   mode: 'payment',
+  //   successUrl: `https://${window.location.host}/success`,
+  //   cancelUrl: `https://${window.location.host}/`,
+  // })
+}
 </script>
 
 <template>
@@ -77,7 +81,7 @@ function payment() {
         Check Out ->
       </NuxtLink>
       <div v-if="link === 'payment'" class="flex flex-col">
-        <button class="mt-6 w-full px-8 py-2 bg-black border-black font-bold text-white" @click="payment">
+        <button class="mt-6 w-full px-8 py-2 bg-black border-black font-bold text-white" @click="order">
           Pay {{ cartTotalPrice }} $
         </button>
         <small class="font-bold text-center my-2">OR</small>
