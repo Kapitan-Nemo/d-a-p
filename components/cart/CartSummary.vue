@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 
 import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
+import { loadStripe } from '@stripe/stripe-js'
 
 defineProps({
   link: {
@@ -18,8 +19,8 @@ const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
 
-// const config = useRuntimeConfig()
-// const stripe = await loadStripe(config.public.STRIPE_PK)
+const config = useRuntimeConfig()
+const stripe = await loadStripe(config.public.STRIPE_PK)
 
 function order() {
   const orders = doc(collection(getFirestore(), 'orders'))
@@ -39,9 +40,9 @@ function order() {
       email: userEmail.value,
       userID: userId.value,
     },
+    products: cart.value,
   }
 
-  // set doc with id
   setDoc(orders, data)
     .then(() => {
       useToast('Order created successfully', 'success')
@@ -56,8 +57,8 @@ function order() {
   //   quantity: a.quantityInCart,
   // }))
 
-  // stripeValues?.redirectToCheckout({
-  //   lineItems,
+  // stripe?.redirectToCheckout({
+  //   lineItems: stripeValues,
   //   mode: 'payment',
   //   successUrl: `https://${window.location.host}/success`,
   //   cancelUrl: `https://${window.location.host}/`,
