@@ -13,7 +13,7 @@ const search = ref('')
 
 onMounted(() => {
   onSnapshot(collection(getFirestore(), 'orders/'), (snap) => {
-    // orders.value = []
+    orders.value = []
     snap.forEach((doc) => {
       orders.value?.push(doc.data() as IOrders)
     })

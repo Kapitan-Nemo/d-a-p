@@ -52,17 +52,21 @@ function order() {
       useToast('Error adding document', 'error')
     })
 
-  // const stripeValues = cart.value.map(a => ({
-  //   price: a.stripeId,
-  //   quantity: a.quantityInCart,
-  // }))
+  const stripeValues = cart.value.map(a => ({
+    price: a.stripeId,
+    quantity: a.quantityInCart,
+  }))
 
-  // stripe?.redirectToCheckout({
-  //   lineItems: stripeValues,
-  //   mode: 'payment',
-  //   successUrl: `https://${window.location.host}/success`,
-  //   cancelUrl: `https://${window.location.host}/`,
-  // })
+  console.log('stripeValues:', stripeValues)
+
+  stripe?.redirectToCheckout({
+    lineItems: stripeValues,
+    mode: 'payment',
+    successUrl: `http://${window.location.host}/success`,
+    cancelUrl: `http://${window.location.host}/`,
+  }).then((result) => {
+    console.log(result)
+  })
 }
 </script>
 
