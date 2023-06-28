@@ -17,7 +17,7 @@ const route = useRoute()
       <div class="p-6 w-full">
         <div v-if="route.name === 'admin'">
           <p class="text-white">
-            Content Dashboard for boxes
+            DASHBOARD CONTENT HERE
           </p>
         </div>
         <NuxtPage v-else />
