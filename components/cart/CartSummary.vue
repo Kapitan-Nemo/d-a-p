@@ -2,6 +2,7 @@
 import { storeToRefs } from 'pinia'
 
 import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
+
 import { loadStripe } from '@stripe/stripe-js'
 
 defineProps({
@@ -14,7 +15,7 @@ defineProps({
 const userStore = useAuth()
 const cartStore = useCart()
 const { cart } = storeToRefs(cartStore)
-const { userName, userLastName, userStreet, userCity, userZipCode, userPhone, userId, userEmail } = storeToRefs(userStore)
+const { userName, userLastName, userStreet, userCity, userZipCode, userPhone, userID, userEmail } = storeToRefs(userStore)
 const cartTotalPrice = computed(() => {
   return cart.value.reduce((acc, product) => acc + product.price * product.quantityInCart, 0)
 })
@@ -38,7 +39,7 @@ function order() {
       zipCode: userZipCode.value,
       phone: userPhone.value,
       email: userEmail.value,
-      userID: userId.value,
+      userID: userID.value,
     },
     products: cart.value,
   }
@@ -46,6 +47,8 @@ function order() {
   setDoc(orders, data)
     .then(() => {
       useToast('Order created successfully', 'success')
+      // Clean cart
+      // cartStore.$reset()
     })
     .catch((error) => {
       console.error('Error adding document: ', error)
@@ -56,8 +59,6 @@ function order() {
     price: a.stripeId,
     quantity: a.quantityInCart,
   }))
-
-  console.log('stripeValues:', stripeValues)
 
   stripe?.redirectToCheckout({
     lineItems: stripeValues,

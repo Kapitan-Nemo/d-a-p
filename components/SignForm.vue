@@ -13,10 +13,10 @@ function singGoogle() {
     .then(() => {
       useToast('Login success', 'success')
       // Add a new document in collection "users"
-      setDoc(doc(getFirestore(), 'users', auth.userId), {
+      setDoc(doc(getFirestore(), 'users', auth.userID), {
         name: auth.userName,
         email: auth.userEmail,
-        id: auth.userId,
+        id: auth.userID,
       })
     })
     .catch((error) => {
@@ -28,7 +28,7 @@ function singEmail() {
   signInWithEmailAndPassword(getAuth(), email.value, password.value)
     .then(() => {
       useToast('Login success', 'success')
-      getDoc(doc(getFirestore(), 'users', auth.userId)).then((doc) => {
+      getDoc(doc(getFirestore(), 'users', auth.userID)).then((doc) => {
         if (doc.exists()) {
           auth.userName = doc.data().name
           auth.userLastName = doc.data().lastName

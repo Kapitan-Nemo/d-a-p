@@ -103,6 +103,13 @@ async function saveProduct(id: string) {
     }
     data.id = albums.id
     data.image = image.value as string
+
+    // Check if slug exists
+    if (products.value.find(product => product.slug === editProduct.value.slug)) {
+      useToast('Slug already exists', 'warning')
+      return
+    }
+
     // set doc with id
     await setDoc(albums, data)
       .then(() => {
@@ -218,6 +225,8 @@ async function saveProduct(id: string) {
           <input id="price" v-model="editProduct.price" name="price" required class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
           <label for="quantity" class="font-bold text-white text-xl">Quantity:</label>
           <input id="quantity" v-model="editProduct.quantityInWarehouse" name="quantity" required class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
+          <label for="slug" class="font-bold text-white text-xl">Slug:</label>
+          <input id="slug" v-model="editProduct.slug" name="slug" required class="mb-3 w-full border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none" type="text">
           <label for="featured" class="font-bold text-white text-xl">Feautred:</label>
           <div class="flex justify-start items-center mb-3">
             <input id="featured" v-model="editProduct.featured" type="checkbox" class="border-b border-white bg-dark-200 h-8 text-white caret-white placeholder-gray-500 focus:outline-none">

@@ -15,7 +15,7 @@ const auth = useAuth()
       <p>User zip code: {{ auth.userZipCode }}</p>
       <p>User phone: {{ auth.userPhone }}</p>
       <p>User email: {{ auth.userEmail }}</p>
-      <p>User id: {{ auth.userId }}</p>
+      <p>User id: {{ auth.userID }}</p>
     </ClientOnly>
     <h2 v-else class="flex items-center justify-center default-height text-2xl font-bold text-center">
       You are not sign in

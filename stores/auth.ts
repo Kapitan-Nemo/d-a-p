@@ -8,7 +8,7 @@ export const useAuth = defineStore('auth', {
     userCity: '',
     userZipCode: '',
     userPhone: 0,
-    userId: '',
+    userID: '',
     userEmail: '' as string | null,
     userPhoto: '' as string | null,
     logged: false,
@@ -17,7 +17,7 @@ export const useAuth = defineStore('auth', {
     onAuth() {
       onAuthStateChanged(getAuth(), (user) => {
         if (user) {
-          this.userId = user.uid
+          this.userID = user.uid
           this.userEmail = user.email
           this.logged = true
           if (user?.displayName)
@@ -26,7 +26,7 @@ export const useAuth = defineStore('auth', {
         }
         else {
           this.logged = false
-          this.userId = ''
+          this.userID = ''
         }
       })
     },
