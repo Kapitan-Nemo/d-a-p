@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable } from 'firebase/storage'
+import { deleteObject, getDownloadURL, getStorage, ref as storageRef, uploadBytesResumable } from 'firebase/storage'
 
 const storage = getStorage()
 const fileInput = ref<HTMLInputElement | null>(null)
@@ -9,9 +9,7 @@ const image = useState('image', () => '')
 
 const progress = ref(0)
 async function uploadFile() {
-  console.log('uploadFile')
   files.value = fileInput.value?.files
-  console.log(files.value)
   if (files.value) {
     console.log(files.value[0].name)
     saveFile()
@@ -19,13 +17,14 @@ async function uploadFile() {
 }
 
 function saveFile() {
-  console.log('saveFile')
   const metadata = {
     contentType: 'image/png',
   }
+
   const file = files.value[0]
-  const storagea = storageRef(storage, `images/${file.name}`)
-  const uploadTask = uploadBytesResumable(storagea, file, metadata)
+  const storageReference = storageRef(storage, `images/${file.name}`)
+
+  const uploadTask = uploadBytesResumable(storageReference, file, metadata)
 
   // Listen for state changes, errors, and completion of the upload.
   uploadTask.on('state_changed',
@@ -69,9 +68,23 @@ function saveFile() {
     },
   )
 }
+
+function deleteFile(name: string) {
+  console.log('deleteFile')
+  const deleteReference = storageRef(storage, `images/${name}`)
+  deleteObject(deleteReference).then(() => {
+  // File deleted successfully
+    useToast('Success', 'File deleted successfully')
+  }).catch((error) => {
+    useToast('Error', error.message)
+  })
+}
 </script>
 
 <template>
   <label class="text-white" for="upload_file">Upload File</label>
   <input id="upload_file" ref="fileInput" name="upload_file" class="" type="file" @change="uploadFile">
+  <button class="text-white" @click="deleteFile('chrzciny')">
+    Delete File
+  </button>
 </template>
